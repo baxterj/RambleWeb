@@ -1,0 +1,80 @@
+<!DOCTYPE html> 
+<html>
+<meta charset="UTF-8">
+<head> 
+	<title>RambleOnline - Image</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" href="assets/css/jquery.mobile-1.2.0.min.css" />
+	<link rel="stylesheet" href="assets/css/core.css" />
+	<link rel="stylesheet" href="assets/css/menus.css" />
+	<script type="text/javascript" charset="utf-8" src="assets/js/cordova-2.1.0.js"></script>
+	<script src="assets/js/jquery-1.8.2.min.js"></script>
+	<script src="assets/js/jquery-mobile-config.js"></script>
+	<script src="assets/js/jquery.mobile-1.2.0.min.js"></script>
+	<script src="assets/js/ajaxrequests.js"></script>
+	
+	<script src="assets/js/utilities.js"></script>
+
+	<script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?libraries=drawing&key=AIzaSyA1Oz8ZnLZ_mfkby54M_sdRzh8EAfAyRNA&sensor=true">
+	</script>
+
+	<script type="text/javascript" src="assets/js/oms.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="assets/css/map_core.css" />
+	<script src="assets/js/map_core.js"></script>
+
+
+</head> 
+<body>
+	<div data-role="page" id="page-viewImage">
+
+	<script type="text/javascript">
+
+	</script>
+
+		<div data-role="header" data-theme="d">
+			<div data-type="horizontal" data-role="controlgroup" class="ui-btn-left">
+				<a href="home.html" data-rel="back" data-role="button" data-icon="back" data-iconpos="notext">Back</a>
+				<a href="home.html" data-role="button" data-icon="home" data-iconpos="notext">Back</a>
+			</div>
+			<h1>View Image</h1>
+			<a href="settings.html" data-role="button" data-icon="gear" data-iconpos="notext" class="ui-btn-right">Settings</a>
+		</div><!-- /header -->
+
+		<div data-role="content" class="ui-content">	
+			<div id="viewImageTitle">&nbsp;</div>
+			<div class="viewImageHolder">
+				<img id="viewImage" src="" />
+			</div>
+
+			<div id="viewImageText" style="padding-bottom:5px">&nbsp;</div>
+
+			<div id="viewImageInfo" style="font-size:10pt">
+
+			</div>
+			<div class="errorMessage" id="imageMessage">&nbsp;</div>
+
+		</div><!-- /content -->
+
+		
+
+		<div data-role="footer" class="ui-bar ui-footer" data-position="fixed">
+
+			<a href="#viewImage-menu" id="viewImage-menubtn" data-rel="popup" data-mini="true">Menu</a>		
+			<div data-role="popup" class="popupMenu" id="viewImage-menu">
+				<ul data-role="listview" data-inset="true" data-mini="true">
+					<li data-role="divider">Menu</li>
+					<li data-icon="delete" data-theme="d"><a href="#" class="deleteButton">Delete</a></li>
+					<!--li data-icon="info" data-theme="d"></li-->
+				</ul>
+			</div>
+
+			<a href="#" data-icon="info" rel="external" id="imageFullLink">View Full Size</a>
+
+		</div><!-- /footer -->
+
+	</div><!-- /page -->
+
+</body>
+</html>

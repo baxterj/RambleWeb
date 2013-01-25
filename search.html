@@ -1,0 +1,133 @@
+<!DOCTYPE html> 
+<html>
+<meta charset="UTF-8">
+<head> 
+	<title>RambleOnline - Search for Routes</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="assets/css/jquery.mobile-1.2.0.min.css" />
+	<link rel="stylesheet" href="assets/css/core.css" />
+	<link rel="stylesheet" href="assets/css/menus.css" />
+	<script type="text/javascript" charset="utf-8" src="assets/js/cordova-2.1.0.js"></script>
+	<script src="assets/js/jquery-1.8.2.min.js"></script>
+	<script src="assets/js/jquery-mobile-config.js"></script>
+	<script src="assets/js/jquery.mobile-1.2.0.min.js"></script>
+	<script src="assets/js/ajaxrequests.js"></script>
+	
+	<script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?libraries=drawing&key=AIzaSyA1Oz8ZnLZ_mfkby54M_sdRzh8EAfAyRNA&sensor=true">
+	</script>
+
+	<script type="text/javascript" src="assets/js/oms.min.js"></script>
+
+	<script src="assets/js/utilities.js"></script>
+
+	<link rel="stylesheet" href="assets/css/map_core.css" />
+	<script src="assets/js/map_core.js"></script>
+
+
+</head> 
+<body>
+
+	<div data-role="page" id="page-searchRoute">
+
+		<script type="text/javascript">
+		function updateSearchPosition(){
+			$('#searchFieldError').html('&nbsp\;')
+			if(validateSearchFields($('#searchFieldError'))){
+				findMapLocation($('#searchWithin').val(), $('#searchUnit').val(), $('#searchLocation').val(), $('#searchFieldError'))
+			}
+		}
+
+		function validateSearchFields(messageTarget){
+			return validateField($('#searchWithin'), 'Within', messageTarget, 'num', false, null, 10) &&
+				validateField($('#searchLocation'), 'Address', messageTarget, null, true, 1, 200)
+		}
+
+		</script>
+
+		<div data-role="header" data-theme="d" class="map_header">
+			<div data-type="horizontal" data-role="controlgroup" class="ui-btn-left">
+				<a href="home.html" data-rel="back" data-role="button" data-icon="back" data-iconpos="notext">Back</a>
+				<a href="home.html" data-role="button" data-icon="home" data-iconpos="notext">Back</a>
+			</div>
+			<h1>Search Routes</h1>
+			<a href="settings.html" data-role="button" data-icon="gear" data-iconpos="notext" class="ui-btn-right">Settings</a>
+		</div><!-- /header -->
+
+		<div data-role="content" class="map_content">	
+			<div class="map_page_nonmap">
+				<div style="width:90%">
+					<label for="searchWithin" class="ui-hidden-accessible">Keywords:</label>
+					<input name="searchKeywords" id="searchKeywords" data-mini="true" placeholder="Keywords: e.g. dogs woods">
+				</div>
+				<div class="f_left" style="width:90%;">
+					<form>
+						<div class="f_left">
+							<label for="searchWithin" class="ui-hidden-accessible">Within:</label>
+							<input name="searchWithin" id="searchWithin" data-mini="true" placeholder="Within:" style="width:150px">
+						</div>
+						<div class="f_left">
+							<select name="searchUnit" id="searchUnit" data-inline="true" data-mini="true">
+								<option value="feet">Feet</option>
+								<option value="meters">Meters</option>
+								<option value="kilometers" selected="selected">KM</option>
+								<option value="miles">Miles</option>
+							</select>
+						</div>
+						<div style="margin-top:5px; clear:both">
+							<label style="float:left; margin-right:10px; margin-top:8px" class="ui-hidden-accessible">Of:</label>
+							<input name="searchLocation" id="searchLocation" data-mini="true" style="float:left;" placeholder="Of Address:">
+							<div class="errorMessage" id="searchFieldError" style="float:left; clear:both">&nbsp;</div>
+						</div>
+						<div class="clear"></div>
+					</form>
+				</div>
+				<div class="f_left" style="width:8%; margin-left:2%; text-align:center">
+					<button onclick="currentPosition()" data-theme="a" data-icon="home" data-iconpos="notext">Here</button>
+					<button onclick="updateSearchPosition()" data-theme="a" data-icon="search" data-iconpos="notext">Find</button>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div id="map_canvas_search" class="map_canvas"></div>
+
+		</div><!-- /content -->
+
+		
+
+		<div data-role="footer" class="ui-bar ui-footer" data-position="fixed">
+
+			<a href="#tracked-menu" id="tracked-menubtn" data-rel="popup" data-mini="true">Menu</a>		
+			<div data-role="popup" class="popupMenu" id="tracked-menu">
+				<ul data-role="listview" data-inset="true" data-mini="true">
+					<li data-role="divider">Menu</li>
+					<li data-icon="home" data-theme="d"><a href="#" onClick="goToCurrentPosition()" data-mini="true">My Location</a></li>
+					<li data-theme="d" data-icon="grid"><a href="#" onClick="setEnableNotesPhotos()" data-mini="true">Notes &amp; Photos</a></li>
+				</ul>
+			</div>
+
+			<a href="#search-routeInfo" data-icon="info" id="search-popupbtn" data-rel="popup">Route Info</a>
+			<div data-role="popup" id="search-routeInfo" class="popup">
+				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+
+				<p>No Route Selected</p>
+
+				
+
+				<div class="search_routelink">
+					<a href="#" data-inline="true" data-role="button" data-mini="true">Go to Route</a>
+				</div>
+
+				<div class="search_favdone">
+					<div data-role="controlgroup" data-type="horizontal" data-mini="true" class="route_favbuttons">
+						<a href="#" class="favBtn" data-role="button"><img src="assets/images/fav_false_mini.png" /></a>
+						<a href="#" class="doneBtn" data-role="button"><img src="assets/images/done_false_mini.png" /></a>
+					</div>
+				</div>
+
+			</div><!--popup-->
+
+		</div><!-- /footer -->
+	</div><!-- /page -->
+
+</body>
+</html>

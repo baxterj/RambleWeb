@@ -1,0 +1,122 @@
+<!DOCTYPE html> 
+<html>
+<meta charset="UTF-8">
+<head> 
+	<title>RambleOnline - Create Route</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" href="assets/css/jquery.mobile-1.2.0.min.css" />
+	<link rel="stylesheet" href="assets/css/core.css" />
+	<link rel="stylesheet" href="assets/css/menus.css" />
+	<script type="text/javascript" charset="utf-8" src="assets/js/cordova-2.1.0.js"></script>
+	<script src="assets/js/jquery-1.8.2.min.js"></script>
+	<script src="assets/js/jquery-mobile-config.js"></script>
+	<script src="assets/js/jquery.mobile-1.2.0.min.js"></script>
+	<script src="assets/js/ajaxrequests.js"></script>
+	
+	<script src="assets/js/utilities.js"></script>
+
+	<script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?libraries=drawing&key=AIzaSyA1Oz8ZnLZ_mfkby54M_sdRzh8EAfAyRNA&sensor=true">
+	</script>
+
+	<script type="text/javascript" src="assets/js/oms.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="assets/css/map_core.css" />
+	<script src="assets/js/map_core.js"></script>
+
+
+</head> 
+<body>
+	
+
+	<div data-role="page" id="page-createTracked">
+
+	<script type="text/javascript">
+	function sendTrackedRoute(){
+		$('#trackedError').html('&nbsp\;')
+
+		if(createLine == null || createLine.getPath().length < 2){
+			$('#trackedError').html('No route created')
+		}else{
+			if(validateTrackedRoute($('#trackedError'))){
+				sendNewRoute(createLine, $('#trackedName').val(), $('#trackedPrivate').val() == 'true', $('#trackedKeywords').val())
+			}
+		}
+
+		
+	}
+
+	function validateTrackedRoute(messageTarget){
+		return validateField($('#trackedName'), 'Name', messageTarget, 'alphanum', true, 2, 200) 
+			&& validateField($('#trackedKeywords'), 'Keywords', messageTarget, 'alphanum', false, 2, 200) 
+	}
+	</script>
+
+		<div data-role="header" data-theme="d" class="map_header">
+			<div data-type="horizontal" data-role="controlgroup" class="ui-btn-left">
+				<a href="home.html" data-rel="back" data-role="button" data-icon="back" data-iconpos="notext">Back</a>
+				<a href="home.html" data-role="button" data-icon="home" data-iconpos="notext">Back</a>
+			</div>
+			<h1>Create Route</h1>
+			<a href="settings.html" data-role="button" data-icon="gear" data-iconpos="notext" class="ui-btn-right">Settings</a>
+		</div><!-- /header -->
+
+		<div data-role="content" class="map_content">	
+			<div id="map_canvas_tracked" class="map_canvas"></div>
+
+		</div><!-- /content -->
+
+		
+
+		<div data-role="footer" class="ui-bar ui-footer" data-position="fixed">
+
+			<a href="#tracked-menu" id="tracked-menubtn" data-rel="popup" data-mini="true">Menu</a>		
+			<div data-role="popup" class="popupMenu" id="tracked-menu">
+				<ul data-role="listview" data-inset="true" data-mini="true">
+					<li data-role="divider">Menu</li>
+					<li data-icon="refresh" data-theme="d"><a href="#" onClick="resetCreation()" data-mini="true">Reset</a></li>
+					<li data-icon="home" data-theme="d"><a href="#" onClick="goToCurrentPosition()" data-mini="true">My Location</a></li>
+					
+					<li data-theme="d" data-icon="grid"><a href="#" onClick="setEnableNotesPhotos()" data-mini="true">Notes &amp; Photos</a></li>
+				</ul>
+			</div>
+
+
+			<a href="#tracked-routeInfo" id="tracked-popupbtn" data-rel="popup" data-position-to="window" data-mini="true">Upload</a>
+			<div data-role="popup" id="tracked-routeInfo" class="popup">
+				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+				<div style="padding:10px; width:300px">
+					<form>
+						<label for="trackedName" data-mini="true" >Name:</label>
+						<input name="trackedName" id="trackedName" data-mini="true" />
+						<label for="trackedPrivate" data-mini="true" >Private?</label>
+						<select name="trackedPrivate" id="trackedPrivate" data-role="slider" data-mini="true" >
+							<option value="false">No</option>
+							<option value="true">Yes</option>
+						</select> 
+						<label for="trackedKeywords" data-mini="true" >Keywords:</label>
+						<input name="trackedKeywords" id="trackedKeywords" data-mini="true" placeholder="e.g. trees fields" />
+					</form><br />
+					<button onClick="endPositionWatch(); sendTrackedRoute();" data-mini="true">Stop Tracking<br />&amp; Submit</button>
+					<div class="errorMessage" id="trackedError">&nbsp;</div>
+				</div>
+
+			</div><!--popup-->
+
+			
+		
+
+			<div style="float:right; width:180px">
+				<div style="float:left; margin-right:5px; margin-top:7px; font-size:11pt;">Tracking:</div> <select name="pauseTrack" id="pauseTrack" data-role="slider" data-mini="true">
+					<option value="pause">Pause</option>
+					<option value="track">Track</option>
+				</select>
+			</div>
+			
+
+
+		</div><!-- /footer -->
+	</div><!-- /page -->
+
+</body>
+</html>

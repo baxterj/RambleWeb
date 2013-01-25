@@ -1,0 +1,139 @@
+<!DOCTYPE html> 
+<html>
+<meta charset="UTF-8">
+<head> 
+	<title>Welcome to RambleOn</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" href="assets/css/jquery.mobile-1.2.0.min.css" />
+	<link rel="stylesheet" href="assets/css/core.css" />
+	<link rel="stylesheet" href="assets/css/menus.css" />
+	<script type="text/javascript" charset="utf-8" src="assets/js/cordova-2.1.0.js"></script>
+	<script src="assets/js/jquery-1.8.2.min.js"></script>
+	<script src="assets/js/jquery-mobile-config.js"></script>
+	<script src="assets/js/jquery.mobile-1.2.0.min.js"></script>
+	<script src="assets/js/ajaxrequests.js"></script>
+	
+	<script src="assets/js/utilities.js"></script>
+
+	<script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?libraries=drawing&key=AIzaSyA1Oz8ZnLZ_mfkby54M_sdRzh8EAfAyRNA&sensor=true">
+	</script>
+
+	<script type="text/javascript" src="assets/js/oms.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="assets/css/map_core.css" />
+	<script src="assets/js/map_core.js"></script>
+</head> 
+<body onload="initialize(); initDrawMode();"> 
+
+
+
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>My Title</h1>
+	</div><!-- /header -->
+
+	<div data-role="content" style="padding:50px;">	
+
+		<div data-role="controlgroup" data-type="horizontal" >
+<a href="index.html" data-role="button" data-theme="c" data-mini="true">Account Settings</a>
+<a href="index.html" data-role="button" data-theme="c" data-mini="true">Logout</a>
+</div>
+
+
+
+
+
+<fieldset data-role="controlgroup" data-mini="true" data-type="horizontal" data-theme="d">
+
+
+    	<input type="radio" name="radio-mini" id="radio-mini-1" value="choice-1" checked="checked" />
+    	<label for="radio-mini-1">Favourites</label>
+
+	<input type="radio" name="radio-mini" id="radio-mini-2" value="choice-2"  />
+    	<label for="radio-mini-2">My Routes</label>
+</fieldset>
+
+<div style="width:75px">
+	<a href="index.html" data-role="button" data-theme="d" data-mini="true" data-iconpos="notext"  data-icon="gear">settings</a>
+</div>
+
+<label for="basic">Username:</label>
+<input type="text" name="name" id="basic" value="" data-mini="true" />
+
+<label for="basic">Password:</label>
+<input type="text" name="name" id="basic" value="" data-mini="true" />
+
+<label for="basic">Confirm Password:</label>
+<input type="text" name="name" id="basic" value="" data-mini="true" />
+
+<label for="basic">Email:</label>
+<input type="text" name="name" id="basic" value="" data-mini="true" />
+
+<label for="basic">Confirm Email:</label>
+<input type="text" name="name" id="basic" value="" data-mini="true" />
+
+
+<a href="index.html" data-role="button" data-theme="a" data-mini="true" data-icon="plus" data-iconpos="left">Create</a>
+
+
+
+<label for="select-choice-min" class="select">Shipping method:</label>
+<select name="select-choice-min" id="select-choice-min" data-mini="true">
+   <option value="standard">Miles</option>
+   <option value="rush">Rush: 3 days</option>
+   <option value="express">Express: next day</option>
+   <option value="overnight">Overnight</option>
+</select> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<!--div id="map_canvas"></div-->	
+	</div><!-- /content -->
+
+	<div class="modeSelect">
+		<div data-role="controlgroup">
+			<a href="#" onclick="swapDrawMode(DRAWTYPES.MARKER);" data-role="button" data-icon="star">Add Points</a>
+			<a href="#" onclick="swapDrawMode(DRAWTYPES.REMOVER);" data-role="button" data-icon="delete">Delete Points</a>
+			<a href="#" onclick="swapDrawMode(DRAWTYPES.MOVER);" data-role="button" data-icon="grid">Move Points</a>
+		</div>
+	</div>
+
+	<div data-role="footer" id="menu_footer"  class="ui-bar">
+		<div data-role="controlgroup" data-type="horizontal" class="f_left">
+			<a href="#" onclick="toggleModeSelect();" data-role="button" data-icon="star" class="modebutton">Add Points</a>
+		</div>
+		<div data-role="controlgroup" data-type="horizontal" class="f_right">
+			<a href="#" onclick="setMapZoom(false);" data-role="button" data-icon="plus">In</a>
+			<a href="#" onclick="setMapZoom(true);" data-role="button" data-icon="minus">Out</a>
+		</div>
+	</div>
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+</body>
+</html>

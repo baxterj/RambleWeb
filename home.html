@@ -1,0 +1,107 @@
+<!DOCTYPE html> 
+<html>
+<meta charset="UTF-8">
+<head> 
+	<title>RambleOnline - Home</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" href="assets/css/jquery.mobile-1.2.0.min.css" />
+	<link rel="stylesheet" href="assets/css/core.css" />
+	<link rel="stylesheet" href="assets/css/menus.css" />
+	<script type="text/javascript" charset="utf-8" src="assets/js/cordova-2.1.0.js"></script>
+	<script src="assets/js/jquery-1.8.2.min.js"></script>
+	<script src="assets/js/jquery-mobile-config.js"></script>
+	<script src="assets/js/jquery.mobile-1.2.0.min.js"></script>
+	<script src="assets/js/ajaxrequests.js"></script>
+	
+	<script src="assets/js/utilities.js"></script>
+
+	<script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?libraries=drawing&key=AIzaSyA1Oz8ZnLZ_mfkby54M_sdRzh8EAfAyRNA&sensor=true">
+	</script>
+
+	<script type="text/javascript" src="assets/js/oms.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="assets/css/map_core.css" />
+	<script src="assets/js/map_core.js"></script>
+
+
+</head> 
+<body>
+	<div data-role="page" id="page-home">
+
+
+
+		<div data-role="header" data-theme="d">
+			<div data-type="horizontal" data-role="controlgroup" class="ui-btn-left">
+				<a href="home.html" data-rel="back" data-role="button" data-icon="back" data-iconpos="notext">Back</a>
+				<a href="home.html" data-role="button" data-icon="home" data-iconpos="notext">Back</a>
+			</div>
+			<h1>Ramble Online</h1>
+			<a href="settings.html" data-role="button" data-icon="gear" data-iconpos="notext" class="ui-btn-right">Settings</a>
+		</div><!-- /header -->
+
+		<div data-role="content" class="ui-content homeContent">	
+			<div class="homeLinksHolder">
+				<a href="create.html" class="homeLink">
+					<table><tr>
+					<td><img src="assets/images/home-create.png" /></td>
+					<td><h3>Create</h3>
+					Make a route by hand, or use GPS</td>
+					</tr></table>
+				</a>
+
+				<a href="search.html" class="homeLink">
+					<table><tr>
+					<td><img src="assets/images/home-search.png" /></td>
+					<td><h3>Search</h3>
+					Search for routes all over the world</td>
+					</tr></table>
+				</a>
+
+				<a href="myRoutes.html?list=saved" class="homeLink">
+					<table><tr>
+					<td><img src="assets/images/home-my.png" /></td>
+					<td><h3>Saved Routes</h3>
+					Routes you create or mark favourite/done</td>
+					</tr></table>
+				</a>
+
+				<a href="myRoutes.html?list=fav" class="homeLink">
+					<table><tr>
+					<td><img src="assets/images/home-favourite.png" /></td>
+					<td><h3>Favourite Routes</h3>
+					Quick access to your most used paths</td>
+					</tr></table>
+				</a>
+
+				<br />
+				<a href="notesPhotos.html" class="homeLink backgroundShading">
+					<table><tr>
+					<td><img src="assets/images/home-notesphotos.png" /></td>
+					<td><h3>Notes &amp; Photos</h3>
+					Create notes and upload photos here.</td>
+					</tr></table>
+				</a>
+
+			</div>
+
+		</div><!-- /content -->
+
+		
+
+		<div data-role="footer" class="ui-bar ui-footer" data-position="fixed">
+			
+			<a href="#home-menu" id="home-menubtn" data-rel="popup" data-mini="true">Menu</a>		
+			<div data-role="popup" class="popupMenu" id="home-menu">
+				<ul data-role="listview" data-inset="true" data-mini="true">
+					<li data-role="divider">Menu</li>
+					<li data-icon="delete" data-theme="d"><a href="#" onClick="navigator.app.exitApp()">Exit App</a></li>
+				</ul>
+			</div>
+
+		</div><!-- /footer -->
+
+	</div><!-- /page -->
+
+</body>
+</html>

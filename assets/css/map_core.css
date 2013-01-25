@@ -1,0 +1,33 @@
+.map_content{
+	padding:0;
+}
+
+.map_canvas{
+	height: 100%;
+	width: 100%;
+}
+
+.map_page_nonmap{
+	padding:5px 10px 0px 10px
+}
+
+.noteImageContent{
+	width: 90%
+}
+
+.noteImageContent div, .noteImageContent p{
+	width: 80%;
+
+}
+
+/*.imageContent img{
+	width:200px;
+}*/
+
+.ni_title{
+	font-weight: bold;
+}
+
+.ni_info{
+	font-size: 10pt
+}

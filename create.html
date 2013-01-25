@@ -1,0 +1,94 @@
+<!DOCTYPE html> 
+<html>
+<meta charset="UTF-8">
+<head> 
+	<title>RambleOnline - Create Route</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" href="assets/css/jquery.mobile-1.2.0.min.css" />
+	<link rel="stylesheet" href="assets/css/core.css" />
+	<link rel="stylesheet" href="assets/css/menus.css" />
+	<script type="text/javascript" charset="utf-8" src="assets/js/cordova-2.1.0.js"></script>
+	<script src="assets/js/jquery-1.8.2.min.js"></script>
+	<script src="assets/js/jquery-mobile-config.js"></script>
+	<script src="assets/js/jquery.mobile-1.2.0.min.js"></script>
+	<script src="assets/js/ajaxrequests.js"></script>
+	
+	<script src="assets/js/utilities.js"></script>
+
+	<script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?libraries=drawing&key=AIzaSyA1Oz8ZnLZ_mfkby54M_sdRzh8EAfAyRNA&sensor=true">
+	</script>
+
+	<script type="text/javascript" src="assets/js/oms.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="assets/css/map_core.css" />
+	<script src="assets/js/map_core.js"></script>
+
+
+</head> 
+<body>
+	
+
+	<div data-role="page" id="page-create">
+
+
+		<div data-role="header" data-theme="d" class="map_header">
+			<div data-type="horizontal" data-role="controlgroup" class="ui-btn-left">
+				<a href="home.html" data-rel="back" data-role="button" data-icon="back" data-iconpos="notext">Back</a>
+				<a href="home.html" data-role="button" data-icon="home" data-iconpos="notext">Back</a>
+			</div>
+			<h1>Select Type</h1>
+			<a href="settings.html" data-role="button" data-icon="gear" data-iconpos="notext" class="ui-btn-right">Settings</a>
+		</div><!-- /header -->
+
+		<div data-role="content">
+			<div style="width:85%; margin:0 auto">	
+				<a href="tracked.html" class="createOption">
+					<h2>Track Movement</h2>
+					<img src="assets/images/create-track.png" /><br />
+					<p>Use the phone’s GPS transmitter to record your movements and build a route based on your position every few seconds.  You can pause recording at any time.</p>
+				</a>
+				<a href="byHand.html" class="createOption">
+					<h2>Create by Hand</h2>
+					<img src="assets/images/create-byhand.png" /><br />
+					<p>Press on the map to create markers which connect together to form your route.  Use to plan a walk or remember where you have been.</p>
+				</a>
+			</div>
+
+		</div><!-- /content -->
+
+		
+
+		<div data-role="footer" class="ui-bar ui-footer" data-position="fixed">
+
+			<a href="#create-Info" id="create-popupbtn" data-rel="popup">Which one?</a>
+			<div data-role="popup" id="create-Info" class="popup">
+				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+				<div style="padding:10px;">
+					<p><b>Using GPS</b><br />
+						Select GPS if you are outdoors, in a vehicle, or otherwise have good visibility of the sky.  You phone's GPS will make the route for you</p>
+					<p><b>Create by Hand</b><br />
+						Create a route by hand if you are indoors or not actually taking the route now.</p>
+				</div>
+
+			</div><!--popup-->
+
+			<a href="#create-Tips" id="create-tipsPopup" data-rel="popup">Tips</a>
+			<div data-role="popup" id="create-Tips" class="popup">
+				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+				<div style="padding:10px;">
+					<p><b><span style="color:#DD0000">Watch your GPS</span></b><br />
+						Leaving the Track page will pause your route, be sure to reactivate using the slider when you wish to continue. (You may use other apps, just be sure to minimise from the Track screen)</p>
+					<p><b>Save for Later</b><br />
+						You can save a hand built route to finish later. Tracked routes are saved automatically.</p>
+					<p><b>Why not both?</b><br />
+						A route created by hand can be finished off using the tracker, and vice versa.</p>
+				</div>
+
+			</div><!--popup-->
+
+		</div><!-- /footer -->
+	</div><!-- /page -->
+
+</body>
+</html>

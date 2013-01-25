@@ -1,0 +1,82 @@
+<!DOCTYPE html> 
+<html>
+<meta charset="UTF-8">
+<head> 
+	<title>Welcome to RambleOn</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" href="assets/css/jquery.mobile-1.2.0.min.css" />
+	<link rel="stylesheet" href="assets/css/core.css" />
+	<link rel="stylesheet" href="assets/css/menus.css" />
+	<script type="text/javascript" charset="utf-8" src="assets/js/cordova-2.1.0.js"></script>
+	<script src="assets/js/jquery-1.8.2.min.js"></script>
+	<script src="assets/js/jquery-mobile-config.js"></script>
+	<script src="assets/js/jquery.mobile-1.2.0.min.js"></script>
+	<script src="assets/js/ajaxrequests.js"></script>
+	
+	<script src="assets/js/utilities.js"></script>
+
+	<script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?libraries=drawing&key=AIzaSyA1Oz8ZnLZ_mfkby54M_sdRzh8EAfAyRNA&sensor=true">
+	</script>
+
+	<script type="text/javascript" src="assets/js/oms.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="assets/css/map_core.css" />
+	<script src="assets/js/map_core.js"></script>
+</head> 
+<body onload=""> 
+
+
+
+<div data-role="page">
+<script type="text/javascript">
+	  $(document).ready(function(){
+
+    $('#map_canvas').css('height', $(window).height() - (stripPX($('#menu_header').css('height')) + stripPX($('#menu_footer').css('height')) + 80));
+
+    $(".footer_drawmode").click(function(){
+      swapDrawMode();
+    });
+    $(".footer_zoomin").click(function(){
+      setMapZoom(false);
+    });
+    $(".footer_zoomout").click(function(){
+      setMapZoom(true);
+    });
+
+
+  });
+</script>
+	<div data-role="header">
+		<h1>My Title</h1>
+		<a href="settings.html" data-role="button" data-icon="gear" data-iconpos="notext" class="ui-btn-right"></a>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+		<div id="map_canvas" ></div>	
+	</div><!-- /content -->
+
+	<div class="modeSelect">
+		<div data-role="controlgroup">
+			<a href="#" onclick="swapDrawMode(DRAWTYPES.MARKER);" data-role="button" data-icon="star">Add Points</a>
+			<a href="#" onclick="swapDrawMode(DRAWTYPES.REMOVER);" data-role="button" data-icon="delete">Delete Points</a>
+			<a href="#" onclick="swapDrawMode(DRAWTYPES.MOVER);" data-role="button" data-icon="grid">Move Points</a>
+		</div>
+	</div>
+
+	<div data-role="footer" id="menu_footer"  class="ui-bar">
+		<div data-role="controlgroup" data-type="horizontal" class="f_left">
+			<a href="#" onclick="toggleModeSelect();" data-role="button" data-icon="star" class="modebutton">Add Points</a>
+			<a href="#" onclick="createVectorThumbnail()"
+		</div>
+
+		<div data-role="controlgroup" data-type="horizontal" class="f_right margin-right5">
+			<a href="#" onclick="setMapZoom(false);" data-role="button" data-icon="plus">In</a>
+			<a href="#" onclick="setMapZoom(true);" data-role="button" data-icon="minus">Out</a>
+		</div>
+	</div><!-- /footer -->
+	<script type="text/javascript">initialize(); initDrawMode();</script>
+</div><!-- /page -->
+
+</body>
+</html>

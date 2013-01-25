@@ -1,0 +1,218 @@
+.rambleon_logo_login{
+	width: 50%;
+	text-align: center;
+	margin:0 auto;
+	max-width: 500px;
+}
+
+.rambleon_logo_register{
+	width: 40%;
+	text-align: center;
+	margin:0 auto;
+	max-width: 300px;
+}
+
+.errorMessage{
+	color:#ab1414;
+	font-weight: bold;
+	font-size: 10pt;
+}
+
+.routelist_title{
+	font-size:12pt;
+}
+
+.routelist_owner{
+	font-size:10pt;
+	padding: 4pt 8pt 0 0;
+	float: left;
+}
+
+.routelist_keywords{
+	font-size:9pt;
+	padding: 2pt 0 0 0;
+	clear:both;
+}
+
+.routelist_icons{
+	padding:1pt 3pt 1pt 3pt;
+	background-color: #D7D7D7;
+	border:1px solid #BBB;
+	float:left;
+	margin-top: 2px;
+}
+
+.routelist_fav, .routelist_done {
+	display: block;
+	width:20px;
+	height:19px;
+	float:left;
+}
+
+.fav_true{
+	background-image: url('../images/fav_true_mini.png')
+}
+
+.fav_false{
+	background-image: url('../images/fav_false_mini.png')
+}
+
+.done_true{
+	background-image: url('../images/done_true_mini.png')
+}
+
+.done_false{
+	background-image: url('../images/done_false_mini.png')
+}
+
+.mapThumb{
+	float: right;
+	clear: both;
+	display: block;
+	width: 250px;
+	height: 150px;
+	background-color: #333;
+	display: none;
+	margin-top: 4pt;
+	background-image: url('http://www.placekitten.com/250/150');
+}
+
+.popup p{
+	padding:10px;
+}
+
+.selfUser{
+	color: #249b00 !important
+}
+
+.route_favbuttons a img{
+	margin-top:-2px;
+}
+
+.ajax_load{
+	display: block;
+	width: 32px;
+	height: 32px;
+	background-image: url('../images/ajax-loader.gif');
+	position: fixed;
+	top: 4px;
+	right: 40px;
+}
+
+.search_favdone{
+	text-align: center;
+	padding: 5px;
+}
+
+.search_routelink{
+	text-align: center;
+	padding: 0px 5px 0px 5px;
+}
+
+.imageStatus{
+	font-size: 10pt;
+	padding-bottom:5px;
+}
+
+.popupTitle{
+	padding-bottom: 5px;
+}
+
+#viewImage{
+	max-width: 350px;
+	max-height: 350px;
+	height: 350px;
+}
+
+.viewImageHolder{
+	text-align: center;
+	height:350px;
+	margin:10px;
+}
+
+.viewImageInfo{
+	font-size: 10pt
+}
+
+.createOption{
+	display: block;
+	text-decoration: none;
+	color: #333 !important;
+	font-size: 10pt;
+}
+
+.createOption:active, .createOption:active h3{
+	color: #7eb285 !important;
+}
+
+.createOption img{
+	width: 100%;
+}
+
+.homeContent{
+	padding:10px 0px 10px 0px;
+}
+
+.homeLinksHolder{
+	width:100%;
+	margin:0 auto;
+
+}
+
+.homeLink{
+	display: block;
+	text-decoration: none;
+	color: #555 !important;
+	font-size: 10pt;
+	margin-top: 2px;
+	padding:0px 20px 0px 20px;
+}
+
+.homeLink:active, .homeLink:active h3{
+	color: #7eb285 !important;
+}
+
+.homeLink h3{
+	margin:0px 0px 5px 0px;
+	color: #333 !important;
+}
+
+.homeLink img{
+	width:100%;
+	max-width: 218px;
+}
+
+.homeLink table{
+	width: 100%;
+}
+.homeLink td{
+	width:50%;
+	vertical-align: middle;
+}
+
+.homeLink td:first-child{
+	width:35%;
+	text-align: right;
+	padding-right: 10px;
+}
+
+.homeLink td:last-child{
+	padding-left: 10px;
+}
+
+.backgroundShading{
+	background-color: #cadaca;
+	margin-top: 10px;
+}
+
+
+.styleLink{
+	font-weight: bold;
+	color:#27549d;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.popupMenu{
+	min-width: 150px;
+}

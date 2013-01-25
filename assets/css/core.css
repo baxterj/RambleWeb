@@ -1,0 +1,29 @@
+html { height: 100%; margin:0; width:100%;}
+
+body { height: 100%; margin: 0; padding: 0; width:100%;}
+
+button, ul, div, a, img, select{
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.f_left{
+	float:left;
+}
+
+.f_right{
+	float: right;
+}
+
+.ui-bar-d {
+	text-shadow: 0px 1px 0px #333;
+	color: #FFF;
+	background-image:url('../images/top_bar_bg.png');
+	background: linear-gradient(rgb(48, 139, 22), rgb(17, 65, 5)) repeat scroll 0% 0% rgb(48,139,22);
+	background-repeat: repeat-x;
+	background-position: 0% 50%;
+}
+
+.clear{
+	height: 100%;
+	clear:both;
+}
