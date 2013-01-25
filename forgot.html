@@ -15,6 +15,8 @@
 	
 	<script src="assets/js/utilities.js"></script>
 
+	<script src="assets/js/site.js"></script>
+
 	<script type="text/javascript"
       src="http://maps.googleapis.com/maps/api/js?libraries=drawing&key=AIzaSyA1Oz8ZnLZ_mfkby54M_sdRzh8EAfAyRNA&sensor=true">
 	</script>
@@ -27,7 +29,7 @@
 
 </head> 
 <body>
-	<div data-role="page">
+	<div data-role="page" id="forgotPage">
 
 		<script type="text/javascript">
 
@@ -47,17 +49,23 @@
 		</script>
 
 
-		<div data-role="header" data-theme="d">
-			<a href="login.html" data-rel="back" data-role="button" data-icon="back" data-iconpos="notext">Back</a>
-			<h1>Forgot Password</h1>
+		<div class="ramble_header">
+			<div class="ramble_header_content">
+				<div class="ramble_header_btngroup">
+					<div data-role="controlgroup" data-type="horizontal" data-inline="true">
+						<a href="home.html" data-role="button">Dashboard</a>
+						<a href="login.html" class="loginLogout" data-role="button">Login</a>
+					</div>
+				</div>
+			</div>
+			<div class="ramble_header_shadow"></div>
+			<div class="logo_ribbon"><a href="index.html"><img src="assets/images/rambleon-logo-header.png" /></a></div>
 		</div><!-- /header -->
 
 		<div data-role="content" class="ui-content">	
-			<div class="rambleon_logo_register">
-				<img src="assets/images/rambleon_logo_sm_cropped.png" width="100%" />
-			</div>
-			<div style="width:80%; margin:0 auto">
-				<p><b>Forgot your password?</b></p>
+			<h1>Forgot your password?</h1>
+			<div class="formcontainer">
+				
 				<p>Not to worry, simply enter your username here, and we will send a password reset link to the email address you supplied when you registered.</p>
 
 				<form>
@@ -65,25 +73,19 @@
 				</form>
 				<div class="successMessage" id="forgotSuccess">&nbsp;</div>
 				<div class="errorMessage" id="forgotError">&nbsp;</div>
-
-				<a href="#" onClick="sendFormForgot()" data-role="button" data-theme="a">Send Email</a>
+				<div class="formbutton_holder">
+					<a href="#" onClick="sendFormForgot()" data-role="button" data-theme="a">Send Email</a>
+				</div>
 			</div>
 
 		</div><!-- /content -->
 
 		
 
-		<div data-role="footer" class="ui-bar ui-footer" data-position="fixed">
-			
-			<a href="#forgot-menu" id="forgot-menubtn" data-rel="popup" data-mini="true">Menu</a>		
-			<div data-role="popup" class="popupMenu" id="forgot-menu">
-				<ul data-role="listview" data-inset="true" data-mini="true">
-					<li data-role="divider">Menu</li>
-					<li data-icon="delete" data-theme="d"><a href="#" onClick="navigator.app.exitApp()">Exit App</a></li>
-				</ul>
-			</div>
-
-		</div><!-- /footer -->
+		<div class="ramble_footer">
+			<div class="ramble_footer_shadow"></div>
+			<div class="footer_content"></div>
+		</div>
 	</div><!-- /page -->
 
 </body>

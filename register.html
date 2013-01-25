@@ -11,6 +11,8 @@
 	<script src="assets/js/jquery-1.8.2.min.js"></script>
 	<script src="assets/js/jquery-mobile-config.js"></script>
 	<script src="assets/js/jquery.mobile-1.2.0.min.js"></script>
+
+	<script src="assets/js/site.js"></script>
 	<script src="assets/js/ajaxrequests.js"></script>
 	
 	<script type="text/javascript"
@@ -47,44 +49,45 @@
 		}
 	</script>
 
-	<div data-role="header" data-theme="d">
-		<a href="login.html" data-rel="back" data-icon="back" data-iconpos="notext">Back</a>
-		<h1>Register</h1>
-		<!--a href="settings.html" data-role="button" data-icon="gear" data-iconpos="notext" class="ui-btn-right"></a-->
+	<div class="ramble_header">
+		<div class="ramble_header_content">
+			<div class="ramble_header_btngroup">
+				<div data-role="controlgroup" data-type="horizontal" data-inline="true">
+					<a href="home.html" data-role="button">Dashboard</a>
+					<a href="login.html" class="loginLogout" data-role="button">Login</a>
+				</div>
+			</div>
+		</div>
+		<div class="ramble_header_shadow"></div>
+		<div class="logo_ribbon"><a href="index.html"><img src="assets/images/rambleon-logo-header.png" /></a></div>
 	</div><!-- /header -->
 
 	<div data-role="content" class="ui-content">	
-		<div class="rambleon_logo_register">
-			<img src="assets/images/rambleon_logo_sm_cropped.png" width="100%" />
-		</div>
-		<div style="width:80%; margin:0 auto">
+		
+		<h1>Register</h1>
+		<div class="formcontainer">
 			<form>
 				Username: <input type="text" name="regUser" id="regUser" data-mini="true">
 				Password: <input type="password" name="regPass" id="regPass" data-mini="true">
 				Confirm Password: <input type="password" name="confPass" id="confPass" data-mini="true">
 				Email: <input type="email" name="email" id="regEmail" data-mini="true">
 				Confirm Email: <input type="email" name="confEmail" id="confEmail" data-mini="true">
+				<p id="regMessage" class="errorMessage">&nbsp;</p>
 			</form>
-			<p id="regMessage" class="errorMessage">&nbsp;</p>
-			<button onClick="sendRegFormData()" name="Send" data-theme="a" data-icon="plus">Create</button>
+			<div class="formbutton_holder">
+				<button onClick="sendRegFormData()" name="Send" data-theme="a" data-mini="true" data-icon="plus">Create</button>
+			</div>
 		</div>
 
 
 	</div><!-- /content -->
 
 	
+	<div class="ramble_footer">
+		<div class="ramble_footer_shadow"></div>
+		<div class="footer_content"></div>
+	</div>
 
-	<div data-role="footer" class="ui-bar ui-footer" data-position="fixed">
-		
-		<a href="#register-menu" id="register-menubtn" data-rel="popup" data-mini="true">Menu</a>		
-		<div data-role="popup" class="popupMenu" id="register-menu">
-			<ul data-role="listview" data-inset="true" data-mini="true">
-				<li data-role="divider">Menu</li>
-				<li data-icon="delete" data-theme="d"><a href="#" onClick="navigator.app.exitApp()">Exit App</a></li>
-			</ul>
-		</div>
-
-	</div><!-- /footer -->
 </div><!-- /page -->
 
 </body>

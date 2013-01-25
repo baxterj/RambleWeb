@@ -1,15 +1,11 @@
-.rambleon_logo_login{
-	width: 50%;
-	text-align: center;
-	margin:0 auto;
-	max-width: 500px;
+.formcontainer{
+	width:40%;
+	margin-left: 5%;
 }
 
-.rambleon_logo_register{
-	width: 40%;
-	text-align: center;
-	margin:0 auto;
-	max-width: 300px;
+.formbutton_holder{
+	width: 60%;
+	float: right;
 }
 
 .errorMessage{

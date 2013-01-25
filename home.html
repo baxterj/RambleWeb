@@ -15,6 +15,8 @@
 	
 	<script src="assets/js/utilities.js"></script>
 
+	<script src="assets/js/site.js"></script>
+
 	<script type="text/javascript"
       src="http://maps.googleapis.com/maps/api/js?libraries=drawing&key=AIzaSyA1Oz8ZnLZ_mfkby54M_sdRzh8EAfAyRNA&sensor=true">
 	</script>
@@ -31,13 +33,17 @@
 
 
 
-		<div data-role="header" data-theme="d">
-			<div data-type="horizontal" data-role="controlgroup" class="ui-btn-left">
-				<a href="home.html" data-rel="back" data-role="button" data-icon="back" data-iconpos="notext">Back</a>
-				<a href="home.html" data-role="button" data-icon="home" data-iconpos="notext">Back</a>
+		<div class="ramble_header">
+			<div class="ramble_header_content">
+				<div class="ramble_header_btngroup">
+					<div data-role="controlgroup" data-type="horizontal" data-inline="true">
+						<a href="home.html" data-role="button">Dashboard</a>
+						<a href="login.html" class="loginLogout" data-role="button">Login</a>
+					</div>
+				</div>
 			</div>
-			<h1>Ramble Online</h1>
-			<a href="settings.html" data-role="button" data-icon="gear" data-iconpos="notext" class="ui-btn-right">Settings</a>
+			<div class="ramble_header_shadow"></div>
+			<div class="logo_ribbon"><a href="index.html"><img src="assets/images/rambleon-logo-header.png" /></a></div>
 		</div><!-- /header -->
 
 		<div data-role="content" class="ui-content homeContent">	
@@ -89,17 +95,10 @@
 
 		
 
-		<div data-role="footer" class="ui-bar ui-footer" data-position="fixed">
-			
-			<a href="#home-menu" id="home-menubtn" data-rel="popup" data-mini="true">Menu</a>		
-			<div data-role="popup" class="popupMenu" id="home-menu">
-				<ul data-role="listview" data-inset="true" data-mini="true">
-					<li data-role="divider">Menu</li>
-					<li data-icon="delete" data-theme="d"><a href="#" onClick="navigator.app.exitApp()">Exit App</a></li>
-				</ul>
-			</div>
-
-		</div><!-- /footer -->
+		<div class="ramble_footer">
+			<div class="ramble_footer_shadow"></div>
+			<div class="footer_content"></div>
+		</div>
 
 	</div><!-- /page -->
 

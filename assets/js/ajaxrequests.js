@@ -70,12 +70,14 @@ function checkLoggedIn(){
 
 function redirectLoggedOut(){
 	if(!checkLoggedIn()){
+		console.log('not logged in')
 		$.mobile.changePage("login.html")
 	}
 }
 
 function redirectLoggedIn(){
 	if(checkLoggedIn()){
+		console.log('already logged in')
 		$.mobile.changePage("home.html")
 	}
 }

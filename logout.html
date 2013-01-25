@@ -2,7 +2,7 @@
 <html>
 <meta charset="UTF-8">
 <head> 
-	<title>RambleOnline - Register</title> 
+	<title>RambleOnline - Logout</title> 
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<link rel="stylesheet" href="assets/css/jquery.mobile-1.2.0.min.css" />
 	<link rel="stylesheet" href="assets/css/core.css" />
@@ -32,7 +32,7 @@
 </head> 
 <body>
 
-<div data-role="page" id="indexPage">
+<div data-role="page" id="logoutPage">
 
 	<div class="ramble_header">
 		<div class="ramble_header_content">
@@ -49,7 +49,16 @@
 
 	<div data-role="content" class="ui-content">	
 		
-		<h1>Index</h1>
+		<h1>Logout</h1>
+		<div class="formcontainer">
+			<h3>Current User: <span id="settingsUserName"></span></h3>
+			<script type="text/javascript">
+				document.getElementById('settingsUserName').innerHTML = window.localStorage.getItem("user")
+			</script>
+			<div class="formbutton_holder">
+				<a href="#" onClick="logout()" data-theme="a" data-role="button">Logout</a>
+			</div>
+		</div>
 		
 
 
