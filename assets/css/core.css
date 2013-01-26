@@ -45,6 +45,7 @@ button, ul, div, a, img, select{
 	background-image: url('../images/header_dropshadow.png');
 	background-repeat: repeat-x;
 	height:6px;
+	width:100%;
 }
 
 .clear{
@@ -74,7 +75,7 @@ div[data-role="page"]{
 
 .ramble_footer{
 	width: 100%;
-	min-height: 30%;
+	min-height: 20%;
 	background-color: #d0cfcd;
 	padding-bottom: 20px;
 	background-image:url('../images/darkpaperfibers.png');
@@ -119,5 +120,131 @@ div[data-role="page"]{
 .footer_links_holder{
 	width: 100%;
 	text-align: center;
-	margin-left: 11%;
+	margin-left: 12%;
+}
+
+.index_intro{
+	width:40%;
+	margin-top: 35px;
+	float: left;
+	display: inline;
+	font-family: arial, tahoma, sans-serif;
+}
+
+.index_welcome{
+	height: 25px;
+	font-size: 29px;
+}
+
+.index_text_logo{
+	width:174px;
+	height: 25px;
+	background-image: url('../images/rambleonline-textual.png');
+	background-repeat: no-repeat;
+	float: left;
+	margin-top: 3px;
+	margin-left:9px;
+	display: inline;
+
+}
+
+.index_tagline{
+	color: #3f3f3f;
+	font-size: 26px;
+	margin-top: 30px;
+}
+
+.index_sellpoints{
+	font-size: 20px;
+}
+
+.index_sellpoints ul{
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+	margin-top: 30px;
+}
+
+.index_sellpoints ul li{
+	background-image:url('../images/ramble_bullet.png');
+	background-repeat: no-repeat;
+	background-position: 0px 5px;
+	padding-left: 40px;
+	margin-bottom: 20px;
+}
+
+.index_carousel{
+	width:500px;
+	float: right;
+	display: inline;
+	height: 300px;
+	margin-top:35px;
+}
+
+.index_steps{
+	margin-top: 30px;
+	background-color: rgba(0,0,0,0.08);
+	height: 200px;
+	overflow:visible;
+	text-align: center;
+}
+
+.index_step{
+	float: left;
+	width: 33%;
+	padding-top: 15px;
+}
+
+.map_step{
+	padding-top: 42px;
+}
+
+.boot_step{
+	padding-top: 35px;
+}
+
+.index_step a{
+	color:#308b17 !important;
+	text-decoration: none;
+}
+
+.index_step a:hover{
+	text-decoration: underline;
+}
+
+.index_about{
+	margin-top: 40px;
+	font-size: 16px;
+}
+
+.nivo-caption{
+	text-shadow:none;
+}
+
+.nivoSlider {
+    position:relative;
+    background:url('slider-themes/dark/loading.gif') no-repeat 50% 50%;
+}
+.nivoSlider img {
+    position:absolute;
+    top:0px;
+    left:0px;
+    display:none;
+}
+.nivoSlider a {
+    border:0;
+    display:block;
+}
+
+.nivo-caption{
+	background-color: rgba(8,40,3,1) !important;
+	font-size: 14px !important;
+}
+
+.nivo-caption b{
+	font-size: 16px !important;
+}
+
+.nivo-directionNav a:hover{
+	background-color: rgba(8,40,3,0.9) !important;
 }
