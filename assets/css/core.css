@@ -248,3 +248,46 @@ div[data-role="page"]{
 .nivo-directionNav a:hover{
 	background-color: rgba(8,40,3,0.9) !important;
 }
+
+.routes_menu{
+	position: relative;
+}
+
+.routes_images{
+	width:436px;
+	height: 290px;
+	background-color: #fff;
+	background-image:url('../images/routes_mode_bg.png');
+}
+
+.routes_images img{
+	margin-top: 3px;
+	margin-left: 3px;
+	display: none;
+	cursor: pointer;
+}
+
+.routes_text{
+	position: absolute;
+	width:50%;
+	right:79px;
+	top:15px;
+	cursor: pointer;
+}
+
+.routes_text div{
+	padding:1px 0px 5px 40px;
+}
+
+.routes_text h3{
+	margin-bottom: 5px;
+}
+
+.routes_text div span{
+	display: none;
+}
+
+.greenBG{
+	background-color: rgba(5,100,5,0.2);
+}
+

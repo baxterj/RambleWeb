@@ -2,7 +2,7 @@
 <html>
 <meta charset="UTF-8">
 <head> 
-	<title>RambleOnline - Home</title> 
+	<title>RambleOnline - Dashboard</title> 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<link rel="stylesheet" href="assets/css/jquery.mobile-1.2.0.min.css" />
 	<link rel="stylesheet" href="assets/css/core.css" />
@@ -47,48 +47,45 @@
 		</div><!-- /header -->
 
 		<div data-role="content" class="ui-content homeContent">	
-			<div class="homeLinksHolder">
-				<a href="create.html" class="homeLink">
-					<table><tr>
-					<td><img src="assets/images/home-create.png" /></td>
-					<td><h3>Create</h3>
-					Make a route by hand, or use GPS</td>
-					</tr></table>
-				</a>
-
-				<a href="search.html" class="homeLink">
-					<table><tr>
-					<td><img src="assets/images/home-search.png" /></td>
-					<td><h3>Search</h3>
-					Search for routes all over the world</td>
-					</tr></table>
-				</a>
-
-				<a href="myRoutes.html?list=saved" class="homeLink">
-					<table><tr>
-					<td><img src="assets/images/home-my.png" /></td>
-					<td><h3>Saved Routes</h3>
-					Routes you create or mark favourite/done</td>
-					</tr></table>
-				</a>
-
-				<a href="myRoutes.html?list=fav" class="homeLink">
-					<table><tr>
-					<td><img src="assets/images/home-favourite.png" /></td>
-					<td><h3>Favourite Routes</h3>
-					Quick access to your most used paths</td>
-					</tr></table>
-				</a>
-
-				<br />
-				<a href="notesPhotos.html" class="homeLink backgroundShading">
-					<table><tr>
-					<td><img src="assets/images/home-notesphotos.png" /></td>
-					<td><h3>Notes &amp; Photos</h3>
-					Create notes and upload photos here.</td>
-					</tr></table>
-				</a>
-
+			<div class="routes_selector">
+				<h2>Routes</h2>
+				<div class="routes_menu">
+					<div class="routes_images">
+						<img id="routeimg1" src="http://www.placekitten.com/415/271" />
+						<img id="routeimg2" src="http://pugholder.com/415/271" />
+						<img id="routeimg3" src="http://www.placekitten.com/415/271" />
+						<img id="routeimg4" src="http://pugholder.com/415/271" />
+					</div>
+					<div class="routes_text">
+						<div id="routetext1">
+							<h3>Create</h3>
+							<span>
+								Plan your own route by placing markers on a map<br />
+								Add keywords so that others might find it
+							</span>
+						</div>
+						<div id="routetext2">
+							<h3>Search</h3>
+							<span>
+								Search for routes all over the world<br />
+								Locate the ones nearest you
+							</span>
+						</div>
+						<div id="routetext3">
+							<h3>Saved Routes</h3>
+							<span>
+								Routes you have personally created, or<br />
+								those that you have marked favourite/done
+							</span>
+						</div>
+						<div id="routetext4">
+							<h3>Favourites</h3>
+							<span>
+								Quick access to your most used paths<br />&nbsp;
+							</span>
+						</div>
+					</div>
+				</div>
 			</div>
 
 		</div><!-- /content -->

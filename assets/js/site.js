@@ -15,7 +15,7 @@ $('#page-home, #logoutPage').live('pageshow', function(event, data){
 	redirectLoggedOut()
 })
 
-$('#loginPage, #registerPage, #forgotPage').live('pageshow', function(event, data){
+$('#loginPage, #registerPage, #forgotPage, #indexPage').live('pageshow', function(event, data){
 	redirectLoggedIn()
 })
 
@@ -27,6 +27,37 @@ $('#indexPage').live('pageshow', function(event, data){
 		animSpeed: 500
 	})
 })
+
+var routesSelectLinks = ['byHand.html', 'search.html', 'myRoutes.html?list=saved', 'myRoutes.html?list=fav']
+
+$('#page-home').live('pageinit', function(event, data){
+	showRoutesItem(1)
+	$('.routes_text div').hover(
+		function(){
+			showRoutesItem($(this).attr('id').split('routetext')[1])
+		}
+	)
+
+	$('.routes_images img').click(function(){
+		$.mobile.changePage(routesSelectLinks[$(this).attr('id').split('routeimg')[1]-1])
+	})
+	$('.routes_text div').click(function(){
+		$.mobile.changePage(routesSelectLinks[$(this).attr('id').split('routetext')[1]-1])
+	})
+
+	
+})
+
+
+function showRoutesItem(num){
+	$('.showing').hide().removeClass('showing')
+	$('.greenBG').removeClass('greenBG')
+
+	$('#routeimg'+num).show().addClass('showing')
+	$('#routetext'+num+' span').show().addClass('showing')
+	$('#routetext'+num).addClass('greenBG')
+}
+
 
 function genFooterHtml(){
 	var html=''
@@ -60,3 +91,6 @@ function loggedInOutButton(){
 		$.mobile.activePage.find('.loginLogout').attr('href', 'login.html')
 	}
 }
+
+
+
