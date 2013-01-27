@@ -15,11 +15,11 @@ $('#page-home, #logoutPage').live('pageshow', function(event, data){
 	redirectLoggedOut()
 })
 
-$('#loginPage, #registerPage, #forgotPage, #indexPage').live('pageshow', function(event, data){
+$('#loginPage, #registerPage, #forgotPage').live('pageshow', function(event, data){
 	redirectLoggedIn()
 })
 
-$('#indexPage').live('pageshow', function(event, data){
+$('#indexPage').live('pageinit', function(event, data){
 	$('#slider').nivoSlider({
 		effect: 'fade',
 		pauseTime: 5000,
@@ -94,3 +94,15 @@ function loggedInOutButton(){
 
 
 
+var imgObj = new Image()
+preloadImages()
+function preloadImages(){
+	var urls= [
+		'assets/images/ramble_carousel_1.png',
+		'assets/images/ramble_carousel_2.png',
+		'assets/images/ramble_carousel_2.png'
+	]
+	for(var i = 0; i < urls.length; i++){
+		imgObj.src=urls[i]
+	}
+}

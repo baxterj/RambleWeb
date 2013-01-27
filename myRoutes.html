@@ -15,6 +15,8 @@
 	
 	<script src="assets/js/utilities.js"></script>
 
+	<script src="assets/js/site.js"></script>
+
 	<script type="text/javascript"
       src="http://maps.googleapis.com/maps/api/js?libraries=drawing&key=AIzaSyA1Oz8ZnLZ_mfkby54M_sdRzh8EAfAyRNA&sensor=true">
 	</script>
@@ -24,61 +26,65 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/map_core.css" />
 	<script src="assets/js/map_core.js"></script>
 
+	<script src="assets/js/jquery.nivo.slider.pack.js"></script>
+	<link rel="stylesheet" href="assets/css/nivo-slider.css" />
+	<link rel="stylesheet" href="assets/css/slider-themes/dark/dark.css" />
 
 </head> 
 <body>
 	<div data-role="page" id="page-routesList">
 
 
-		<div data-role="header" data-theme="d">
-			<div data-type="horizontal" data-role="controlgroup" class="ui-btn-left">
-				<a href="home.html" data-rel="back" data-role="button" data-icon="back" data-iconpos="notext">Back</a>
-				<a href="home.html" data-role="button" data-icon="home" data-iconpos="notext">Back</a>
+		<div class="ramble_header">
+			<div class="ramble_header_content">
+				<div class="ramble_header_btngroup">
+					<div data-role="controlgroup" data-type="horizontal" data-inline="true">
+						<a href="home.html" data-role="button">Dashboard</a>
+						<a href="login.html" class="loginLogout" data-role="button">Login</a>
+					</div>
+				</div>
 			</div>
-			<h1>Routes Lists</h1>
-			<a href="settings.html" data-role="button" data-icon="gear" data-iconpos="notext" class="ui-btn-right">Settings</a>
-
-			<div data-role="navbar" >
-				<ul data-theme="d">
-					<li class="routeList_my"><a href="#" onclick="routesListType='my'; successRoutesList(null, null)">My Routes</a></li>
-					<li class="routeList_saved"><a href="#" onclick="routesListType='saved'; successRoutesList(null, null)">All Saved</a></li>
-					<li class="routeList_fav"><a href="#" onclick="routesListType='fav'; successRoutesList(null, null)">Favourite</a></li>
-					<li class="routeList_done"><a href="#" onclick="routesListType='done'; successRoutesList(null, null)">Done</a></li>
-				</ul>
-			</div><!-- /navbar -->
-
+			<div class="ramble_header_shadow"></div>
+			<div class="logo_ribbon"><a href="index.html"><img src="assets/images/rambleon-logo-header.png" /></a></div>
 		</div><!-- /header -->
-
-		<div data-role="content" class="ui-content">	
 
 			
 
+		<div data-role="content" class="ui-content">
+			<div class="general_routes_nav">
+				<a href="byHand.html" data-role="button" data-icon="plus" data-inline="true">New Route</a>
+				<a href="search.html" data-role="button" data-icon="search" data-inline="true">Find Routes</a>
+			</div>
+			<div class="myRoutes_content">
+				<div data-role="navbar" class="web_navbar">
+					<ul data-theme="d">
+						<li class="routeList_my"><a href="#" onclick="routesListType='my'; successRoutesList(null, null)">My Routes</a></li>
+						<li class="routeList_saved"><a href="#" onclick="routesListType='saved'; successRoutesList(null, null)">All Saved</a></li>
+						<li class="routeList_fav"><a href="#" onclick="routesListType='fav'; successRoutesList(null, null)">Favourite</a></li>
+						<li class="routeList_done"><a href="#" onclick="routesListType='done'; successRoutesList(null, null)">Done</a></li>
+					</ul>
+				</div><!-- /navbar -->
 
-
-			<ul data-role="listview" id="myRoutesList" data-split-icon="gear" data-split-theme="d" data-filter="true">
-				<!--li><a href="index.html">
-					<img src="images/album-bb.jpg" />
-					<h3>Broken Bells</h3>
-					<p>Broken Bells</p>
-					</a><a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
-				</li-->
-			</ul>
-			<p id="routesListMessage" class="errorMessage">&nbsp;</p>
+				<div class="routes_list_holder">
+					<ul data-role="listview" id="myRoutesList" data-split-icon="gear" data-split-theme="d" data-filter="true" data-inset="true">
+						<!--li><a href="index.html">
+							<img src="images/album-bb.jpg" />
+							<h3>Broken Bells</h3>
+							<p>Broken Bells</p>
+							</a><a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
+						</li-->
+					</ul>
+					<p id="routesListMessage" class="errorMessage">&nbsp;</p>
+				</div>
+			</div><!--/myRoutes_content-->
 		</div><!-- /content -->
 
 		
 
-		<div data-role="footer" class="ui-bar ui-footer" data-position="fixed">
-			
-			<a href="#myRoutes-menu" id="myRoutes-menubtn" data-rel="popup" data-mini="true">Menu</a>		
-			<div data-role="popup" class="popupMenu" id="myRoutes-menu">
-				<ul data-role="listview" data-inset="true" data-mini="true">
-					<li data-role="divider">Menu</li>
-					<li data-icon="delete" data-theme="d"><a href="#" onClick="navigator.app.exitApp()">Exit App</a></li>
-				</ul>
-			</div>
-			
-		</div><!-- /footer -->
+		<div class="ramble_footer">
+			<div class="ramble_footer_shadow"></div>
+			<div class="footer_content"></div>
+		</div>
 	</div><!-- /page -->
 
 </body>

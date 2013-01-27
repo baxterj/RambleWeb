@@ -8,7 +8,7 @@ var routesListMsgTarget
 
 
 $('#page-routesList').live('pageshow', function(event, data){
-	if(data.prevPage.attr('id') == 'page-home'){
+	if(data.prevPage.attr('id') == 'page-home' || data.prevPage.attr('id') == null){
 		getMyRoutesItems($('#routesListMessage'), getUrlVars()["list"])
 	}else{
 		getMyRoutesItems($('#routesListMessage'), routesListType)

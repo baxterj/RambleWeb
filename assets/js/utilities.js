@@ -143,7 +143,7 @@ function showAjaxLoad(bool){
 		//}
 		$.mobile.activePage.find('[data-role="header"]').append('<div class="ajax_load"></div>')
 	}else{
-		console.log(queuedRequests)
+		//console.log(queuedRequests)
 		queuedRequests--
 	//	if(queuedRequests <= 0){
 			$.mobile.activePage.find('[data-role="header"] .ajax_load').remove()	
