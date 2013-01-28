@@ -27,11 +27,12 @@ button, ul, div, a, img, select{
 	height: 101px;
 	position: absolute;
 	top:0px;
-	left: 15%;
+	left:-5px;
 	z-index: 20;
 }
 
 .ramble_header_content{
+	position: relative;
 	width: 1000px;
 	margin: 0 auto;
 	height: 100%;
@@ -179,6 +180,9 @@ div[data-role="page"]{
 	display: inline;
 	height: 300px;
 	margin-top:35px;
+	background-image: url('../images/ajax-loader-black.gif');
+	background-position: center center;
+	background-repeat: no-repeat;
 }
 
 .index_steps{
@@ -331,4 +335,11 @@ div[data-role="page"]{
 .other_feature span{
 	font-size: 14px;
 	font-weight: normal;
+}
+
+.routeInfo{
+	background-color: rgba(0,0,0,0.07);
+	margin-top: 30px;
+	padding: 5px 10px 5px 10px;
+	width: 80%;
 }

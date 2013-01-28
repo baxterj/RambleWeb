@@ -15,9 +15,9 @@ var maps = {
 var enableNotesPhotos = true
 
 var geoLocOptions = { 
-	maximumAge: 3000,
-	timeout: 20000,
-	enableHighAccuracy: true
+	maximumAge: 30000,
+	timeout: 20000//,
+	//enableHighAccuracy: true
 }
 
 var newItemMarker
@@ -74,8 +74,6 @@ var trackDataTimer = setTimeout("trackDataEnabled = true", 30000)
 var speedMeasurements = []
 var altitudeMeasurements = []
 
-var firstRoutePreview = true
-
 var deleteMessageTarget
 
 var oms
@@ -97,14 +95,12 @@ $('#page-viewRoute').live('pageshow', function(event){
 })
 
 $('#page-searchRoute').live('pageshow', function(event){
-	sortMapHeight('.map_page_nonmap')
 	createMapSearch()
 	activeMap = maps.searchMap
 	
 })
 
 $('#page-createByHand').live('pageshow', function(event){
-//	sortMapHeight('.map_page_nonmap')
 	createMapByHand()
 	activeMap = maps.createMap
 	
@@ -139,22 +135,27 @@ $('#page-home, #page-create, #page-routesList').live('pageshow', function(event,
 
 
 function findMapLocation(location, messageTarget){
-	geocoder = new google.maps.Geocoder();
-	var oldLatLngBounds = activeMap.getBounds()
-	geocoder.geocode( { 
-		address: location,
-		region: 'gb',
-		}, 
-		function(results, status) {
-			if (status == google.maps.GeocoderStatus.OK) {
-				activeMap.fitBounds(results[0].geometry.viewport)
-				if(oldLatLngBounds.equals(activeMap.getBounds())){
-					activeMap.panBy(0, 1)//refresh map
+	if(location != null && location != ''){
+		geocoder = new google.maps.Geocoder();
+		var oldLatLngBounds = activeMap.getBounds()
+		geocoder.geocode( { 
+			address: location,
+			region: 'gb',
+			}, 
+			function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK) {
+					activeMap.fitBounds(results[0].geometry.viewport)
+					if(oldLatLngBounds.equals(activeMap.getBounds())){
+						activeMap.panBy(0, 1)//refresh map
+					}
+				}else{
+					messageTarget.html('Could not find address')
 				}
-			}else{
-				messageTarget.html('Could not find address')
-			}
-		});
+			});
+	}else{
+		activeMap.panBy(0, 1)//refresh map
+	}
+	
 
 }
 
@@ -261,13 +262,6 @@ function showRouteContent(marker){
 	$.mobile.activePage.find('#search-routeInfo p').html(routeInfoHTML(data))
 	createFavDoneButtons(data.id, data.fav, data.done)
 	$.mobile.activePage.find('.search_routelink a').attr('href', 'route.html?id='+data.id)
-	if(firstRoutePreview){
-		firstRoutePreview = false
-		$.mobile.activePage.find('#search-routeInfo').popup("open", { positionTo: '#search-popupbtn' })
-	}
-	
-
-
 
 }
 
@@ -477,8 +471,6 @@ function createMapRoute(){
 		
 	})
 
-	trackCurrentPosition(maps.routeMap)
-	goToCurrentPosition()
 
 
 }
@@ -537,7 +529,6 @@ function createMapByHand(){
 		loadCreateLine(maps.createMap)//loads from window.localstorage if exists
 	}
 
-	trackCurrentPosition(maps.createMap)
 }
 
 function createMapTracked(){
@@ -583,9 +574,6 @@ function createMapTracked(){
 		loadCreateLine(maps.trackedMap)//loads from window.localstorage
 	}
 
-	
-	goToCurrentPosition()
-	trackCurrentPosition(maps.trackedMap)
 
 
 }
@@ -613,8 +601,6 @@ function createMapSearch(){
 	if(oldCenter != null){
 		maps.searchMap.setCenter(oldCenter)
 		maps.searchMap.setZoom(oldZoom)
-	}else{
-		goToCurrentPosition()
 	}
 
 	resetOMS(maps.searchMap)
@@ -688,7 +674,6 @@ function createMapNotesPhotos(){
 		});
 	}
 
-	trackCurrentPosition(maps.noteMap)
 
 	
 }

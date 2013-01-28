@@ -12,6 +12,8 @@
 	<script src="assets/js/jquery-mobile-config.js"></script>
 	<script src="assets/js/jquery.mobile-1.2.0.min.js"></script>
 	<script src="assets/js/ajaxrequests.js"></script>
+
+	<script src="assets/js/site.js"></script>
 	
 	<script type="text/javascript"
       src="http://maps.googleapis.com/maps/api/js?libraries=drawing&key=AIzaSyA1Oz8ZnLZ_mfkby54M_sdRzh8EAfAyRNA&sensor=true">
@@ -24,6 +26,9 @@
 	<link rel="stylesheet" href="assets/css/map_core.css" />
 	<script src="assets/js/map_core.js"></script>
 
+	<script src="assets/js/jquery.nivo.slider.pack.js"></script>
+	<link rel="stylesheet" href="assets/css/nivo-slider.css" />
+	<link rel="stylesheet" href="assets/css/slider-themes/dark/dark.css" />
 
 </head> 
 <body>
@@ -39,81 +44,86 @@
 		}
 
 		function validateSearchFields(messageTarget){
-			return validateField($('#searchLocation'), 'Address', messageTarget, null, true, 1, 200)
+			return validateField($('#searchLocation'), 'Address', messageTarget, null, false, 1, 200)
 		}
 
 		</script>
 
-		<div data-role="header" data-theme="d" class="map_header">
-			<div data-type="horizontal" data-role="controlgroup" class="ui-btn-left">
-				<a href="home.html" data-rel="back" data-role="button" data-icon="back" data-iconpos="notext">Back</a>
-				<a href="home.html" data-role="button" data-icon="home" data-iconpos="notext">Back</a>
+		<div class="ramble_header">
+			<div class="ramble_header_content">
+				<div class="ramble_header_btngroup">
+					<div data-role="controlgroup" data-type="horizontal" data-inline="true">
+						<a href="home.html" data-role="button">Dashboard</a>
+						<a href="login.html" class="loginLogout" data-role="button">Login</a>
+					</div>
+				</div>
+				<div class="logo_ribbon"><a href="index.html"><img src="assets/images/rambleon-logo-header.png" /></a></div>
 			</div>
-			<h1>Search Routes</h1>
-			<a href="settings.html" data-role="button" data-icon="gear" data-iconpos="notext" class="ui-btn-right">Settings</a>
+			<div class="ramble_header_shadow"></div>
 		</div><!-- /header -->
 
-		<div data-role="content" class="map_content">	
-			<div class="map_page_nonmap">
-				<div style="width:90%">
-					<label for="searchKeywords" class="ui-hidden-accessible">Keywords:</label>
-					<input name="searchKeywords" id="searchKeywords" data-mini="true" placeholder="Keywords: e.g. dogs woods">
+		<div data-role="content" class="map_content">
+
+			<div class="general_routes_nav">
+				<div data-role="controlgroup" data-type="horizontal" data-mini="true">
+					<a href="home.html" data-role="button" data-icon="home" data-inline="true">Dashboard</a>
+					<a href="byHand.html" data-role="button" data-icon="plus" data-inline="true">New Route</a>
+					<a href="search.html" class="ui-btn-active ui-state-persist" data-role="button" data-icon="search" data-inline="true">Route Search</a>
+					<a href="myRoutes.html" data-role="button" data-icon="star" data-inline="true">My Routes</a>
+					<a href="notesPhotos.html" data-role="button" data-icon="grid" data-inline="true">Notes &amp; Photos</a>
 				</div>
-				<div class="f_left" style="width:90%;">
-					<form>
-						<div style="margin-top:5px; clear:both">
-							<label style="float:left; margin-right:10px; margin-top:8px" class="ui-hidden-accessible">Of:</label>
-							<input name="searchLocation" id="searchLocation" data-mini="true" style="float:left;" placeholder="Address">
-							<div class="errorMessage" id="searchFieldError" style="float:left; clear:both">&nbsp;</div>
-						</div>
-						<div class="clear"></div>
-					</form>
-				</div>
-				<div class="f_left" style="width:8%; margin-left:2%; margin-top:-35px; text-align:center">
-					<button onclick="currentPosition()" data-theme="a" data-icon="home" data-iconpos="notext">Here</button>
-					<button onclick="updateSearchPosition()" data-theme="a" data-icon="search" data-iconpos="notext">Find</button>
-				</div>
-				<div class="clear"></div>
+			</div>
+
+
+			<div class="map_page_content">
+				<h3>Create Route</h3>
 			</div>
 			<div id="map_canvas_search" class="map_canvas"></div>
+			<div class="web_map_controls">
+				<div style="width:80%">
+					<label for="searchKeywords">Keywords:</label>
+					<input name="searchKeywords" id="searchKeywords" data-mini="true" placeholder="e.g. dogs woods">
+					<label>Address</label>
+					<input name="searchLocation" id="searchLocation" data-mini="true">
+					<div class="errorMessage" id="searchFieldError">&nbsp;</div>
+				
+					<button onclick="updateSearchPosition()" data-theme="a" data-mini="true" data-icon="search">Find</button>
+				</div>
+
+				<div id="search-routeInfo" class="routeInfo">
+					<p>No Route Selected</p>
+					<div class="search_routelink">
+						<a href="#" data-inline="true" data-role="button" data-mini="true">Go to Route</a>
+					</div>
+
+					<div class="search_favdone">
+						<div data-role="controlgroup" data-type="horizontal" data-mini="true" class="route_favbuttons">
+							<a href="#" class="favBtn" data-role="button"><img src="assets/images/fav_false_mini.png" /></a>
+							<a href="#" class="doneBtn" data-role="button"><img src="assets/images/done_false_mini.png" /></a>
+						</div>
+					</div>
+
+				</div><!--route info-->
+
+				<ul data-role="listview" data-inset="true" data-mini="true" style="margin-top:30px">
+					<li data-role="divider" data-theme="a">Map Controls</li>
+					<li data-icon="home" data-theme="d"><a href="#" onClick="goToCurrentPosition()">My Location</a></li>
+					<li data-theme="d" data-icon="grid"><a href="#" onClick="setEnableNotesPhotos()">Notes &amp; Photos</a></li>
+				</ul>
+
+
+				
+			</div>
 
 		</div><!-- /content -->
 
 		
 
-		<div data-role="footer" class="ui-bar ui-footer" data-position="fixed">
+		<div class="ramble_footer">
+			<div class="ramble_footer_shadow"></div>
+			<div class="footer_content"></div>
+		</div>
 
-			<a href="#tracked-menu" id="tracked-menubtn" data-rel="popup" data-mini="true">Menu</a>		
-			<div data-role="popup" class="popupMenu" id="tracked-menu">
-				<ul data-role="listview" data-inset="true" data-mini="true">
-					<li data-role="divider">Menu</li>
-					<li data-icon="home" data-theme="d"><a href="#" onClick="goToCurrentPosition()" data-mini="true">My Location</a></li>
-					<li data-theme="d" data-icon="grid"><a href="#" onClick="setEnableNotesPhotos()" data-mini="true">Notes &amp; Photos</a></li>
-				</ul>
-			</div>
-
-			<a href="#search-routeInfo" data-icon="info" id="search-popupbtn" data-rel="popup">Route Info</a>
-			<div data-role="popup" id="search-routeInfo" class="popup">
-				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-
-				<p>No Route Selected</p>
-
-				
-
-				<div class="search_routelink">
-					<a href="#" data-inline="true" data-role="button" data-mini="true">Go to Route</a>
-				</div>
-
-				<div class="search_favdone">
-					<div data-role="controlgroup" data-type="horizontal" data-mini="true" class="route_favbuttons">
-						<a href="#" class="favBtn" data-role="button"><img src="assets/images/fav_false_mini.png" /></a>
-						<a href="#" class="doneBtn" data-role="button"><img src="assets/images/done_false_mini.png" /></a>
-					</div>
-				</div>
-
-			</div><!--popup-->
-
-		</div><!-- /footer -->
 	</div><!-- /page -->
 
 </body>
