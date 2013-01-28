@@ -141,12 +141,12 @@ function showAjaxLoad(bool){
 		// }else{
 			queuedRequests++
 		//}
-		$.mobile.activePage.find('[data-role="header"]').append('<div class="ajax_load"></div>')
+		$.mobile.activePage.find('.ramble_header').append('<div class="ajax_load"></div>')
 	}else{
 		//console.log(queuedRequests)
 		queuedRequests--
 	//	if(queuedRequests <= 0){
-			$.mobile.activePage.find('[data-role="header"] .ajax_load').remove()	
+			$.mobile.activePage.find('.ramble_header .ajax_load').remove()	
 	//	}
 		
 	}

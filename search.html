@@ -34,13 +34,12 @@
 		function updateSearchPosition(){
 			$('#searchFieldError').html('&nbsp\;')
 			if(validateSearchFields($('#searchFieldError'))){
-				findMapLocation($('#searchWithin').val(), $('#searchUnit').val(), $('#searchLocation').val(), $('#searchFieldError'))
+				findMapLocation($('#searchLocation').val(), $('#searchFieldError'))
 			}
 		}
 
 		function validateSearchFields(messageTarget){
-			return validateField($('#searchWithin'), 'Within', messageTarget, 'num', false, null, 10) &&
-				validateField($('#searchLocation'), 'Address', messageTarget, null, true, 1, 200)
+			return validateField($('#searchLocation'), 'Address', messageTarget, null, true, 1, 200)
 		}
 
 		</script>
@@ -57,32 +56,20 @@
 		<div data-role="content" class="map_content">	
 			<div class="map_page_nonmap">
 				<div style="width:90%">
-					<label for="searchWithin" class="ui-hidden-accessible">Keywords:</label>
+					<label for="searchKeywords" class="ui-hidden-accessible">Keywords:</label>
 					<input name="searchKeywords" id="searchKeywords" data-mini="true" placeholder="Keywords: e.g. dogs woods">
 				</div>
 				<div class="f_left" style="width:90%;">
 					<form>
-						<div class="f_left">
-							<label for="searchWithin" class="ui-hidden-accessible">Within:</label>
-							<input name="searchWithin" id="searchWithin" data-mini="true" placeholder="Within:" style="width:150px">
-						</div>
-						<div class="f_left">
-							<select name="searchUnit" id="searchUnit" data-inline="true" data-mini="true">
-								<option value="feet">Feet</option>
-								<option value="meters">Meters</option>
-								<option value="kilometers" selected="selected">KM</option>
-								<option value="miles">Miles</option>
-							</select>
-						</div>
 						<div style="margin-top:5px; clear:both">
 							<label style="float:left; margin-right:10px; margin-top:8px" class="ui-hidden-accessible">Of:</label>
-							<input name="searchLocation" id="searchLocation" data-mini="true" style="float:left;" placeholder="Of Address:">
+							<input name="searchLocation" id="searchLocation" data-mini="true" style="float:left;" placeholder="Address">
 							<div class="errorMessage" id="searchFieldError" style="float:left; clear:both">&nbsp;</div>
 						</div>
 						<div class="clear"></div>
 					</form>
 				</div>
-				<div class="f_left" style="width:8%; margin-left:2%; text-align:center">
+				<div class="f_left" style="width:8%; margin-left:2%; margin-top:-35px; text-align:center">
 					<button onclick="currentPosition()" data-theme="a" data-icon="home" data-iconpos="notext">Here</button>
 					<button onclick="updateSearchPosition()" data-theme="a" data-icon="search" data-iconpos="notext">Find</button>
 				</div>

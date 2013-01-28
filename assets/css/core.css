@@ -58,7 +58,7 @@ div[data-role="content"]{
 	width: 1000px;
 	margin:0 auto;
 	margin-bottom: 20px;
-	min-height: 60%;
+	min-height: 80%;
 }
 
 div[data-role="page"]{
@@ -250,7 +250,7 @@ div[data-role="page"]{
 }
 
 .routes_selector{
-	padding-top: 20px;
+	padding-top: 50px;
 }
 
 .routes_menu{

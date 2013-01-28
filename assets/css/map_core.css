@@ -3,8 +3,9 @@
 }
 
 .map_canvas{
-	height: 100%;
-	width: 100%;
+	height: 600px;
+	width: 70%;
+	float: left;
 }
 
 .map_page_nonmap{
@@ -30,4 +31,21 @@
 
 .ni_info{
 	font-size: 10pt
+}
+
+.map_page_content{
+	padding-top: 60px;
+}
+
+.web_map_controls{
+	float: right;
+	width: 25%;
+}
+
+.web_map_controls ul{
+	width: 80%;
+}
+
+.web_map_controls ul .ui-btn-inner, .web_map_controls ul .ui-btn-up-a{
+	font-size: 13px;
 }

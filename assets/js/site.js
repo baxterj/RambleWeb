@@ -19,7 +19,7 @@ $('#loginPage, #registerPage, #forgotPage').live('pageshow', function(event, dat
 	redirectLoggedIn()
 })
 
-$('#indexPage').live('pageinit', function(event, data){
+$('#indexPage').live('pageshow', function(event, data){
 	$('#slider').nivoSlider({
 		effect: 'fade',
 		pauseTime: 5000,
