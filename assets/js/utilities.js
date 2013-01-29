@@ -69,20 +69,6 @@ function fieldsEqual(first, second, setName, messageTarget){
 	return true
 }
 
-function stringifyArray(argArray, delimeter){
-	var out = ''
-	var delim = ' '
-	if(delimeter != null){
-		delim = delimeter
-	}
-	for (var i = 0; i < argArray.length; i++){
-		out += argArray[i]
-		if(i < argArray.length-1){
-			out += delim
-		}
-	}
-	return out
-}
 
 var initialScreenSize = window.innerHeight;
 window.addEventListener("resize", function() {
@@ -127,7 +113,7 @@ function routeInfoHTML(data){ //takes a route object from api/v1/route/#/
 	out += '<b>Private: </b>' + yesTrue(data.private) + '<br />\n'
 	out += '<b>Created: </b>' + data.creation_date + '<br />\n'
 	out += '<b>Last Update: </b>' + data.update_date + '<br />\n'
-	out += '<b>Keywords: </b>' + data.keywords + '<br />\n'
+	out += '<b>Keywords: </b>' + data.keywords.join(" ") + '<br />\n'
 
 
 

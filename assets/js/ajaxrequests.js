@@ -145,7 +145,7 @@ function successRoutesList(data, messageTarget){
 }
 
 function createRouteListItem(route){
-	var html = '<li>\n' //data-filtertext="'+stringifyArray(route.keywords)+'">\n'
+	var html = '<li>\n'
 	html += '<a href="route.html?id='+route.id+'">\n'
 	html += '<div class="routelist_title">' + route.name + '</div>\n'
 	html += '<div class="routelist_owner'+isUserClass(route.owner.username)+'">Owner: ' + route.owner.username + '</div>\n'
@@ -153,7 +153,7 @@ function createRouteListItem(route){
 	html += '<div class="routelist_fav fav_'+route.fav+'"></div>\n'
 	html += '<div class="routelist_done done_'+route.done+'"></div>\n'
 	html += '</div>\n'
-	html += '<div class="routelist_keywords">Keywords: ' + stringifyArray(route.keywords)+'</div>\n'
+	html += '<div class="routelist_keywords">Keywords: ' + route.keywords.join(" ")+'</div>\n'
 	html += '<div class="mapThumb" id="mapThumb'+route.id+'"></div>\n'
 	//html += '<a href="#" onClick="showMapThumbnail('+route.id+')" data-icon="grid" data-iconpos="right" title="Map"></a>\n'
 	html += '</a></li>\n'
@@ -207,7 +207,7 @@ function getSearchRoutes(map){
 	var data = 'bounds='+ map.getBounds().toUrlValue()
 	if($('#searchKeywords').val() != ''){
 		if(validateField($('#searchKeywords'), 'Keywords', $('#searchFieldError'), 'alphanum', false, 0, 200)){
-			data += '&filterwords='+stringifyArray($('#searchKeywords').val().split(' '), ',')
+			data += '&filterwords='+ $('#searchKeywords').val().split(' ').join(',')
 		}
 	}
 	
@@ -291,7 +291,7 @@ function getImage(id){
 function displayImage(data, messageTarget){
 	$('#viewImage').attr('src', 'http://i.imgur.com/'+data.image.split('|')[0]+'l.jpg')
 
-	$('#viewImageTitle').html('<b>'+data.title+'</b>')
+	$('#viewImageTitle').html(data.title)
 	$('#viewImageText').html(data.text)
 	$('#imageFullLink').attr('href', 'http://i.imgur.com/'+data.image.split('|')[0]+'')
 

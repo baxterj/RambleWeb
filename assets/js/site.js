@@ -11,7 +11,7 @@ $('div[data-role="page"]').live('pageshow', function(event, data){
 	loggedInOutButton()
 })
 
-$('#page-home, #logoutPage').live('pageshow', function(event, data){
+$('#page-home, #logoutPage, #page-createByHand, #page-routesList, #page-notesphotos, #page-viewRoute, #page-searchRoute, #page-viewImage').live('pageshow', function(event, data){
 	redirectLoggedOut()
 })
 

@@ -81,9 +81,19 @@
 	color: #249b00 !important
 }
 
-.route_favbuttons a img{
-	margin-top:-2px;
+.route_favbuttons{
+	width: 100%;
 }
+
+
+.route_favbuttons a img{
+	margin-top: -7px;
+	margin-left: 5px;
+	position: relative;
+	top:4px;
+}
+
+
 
 .ajax_load{
 	display: block;
@@ -116,15 +126,15 @@
 }
 
 #viewImage{
-	max-width: 350px;
-	max-height: 350px;
-	height: 350px;
+	
 }
 
 .viewImageHolder{
 	text-align: center;
-	height:350px;
-	margin:10px;
+	height:600px;
+	width: 70%;
+	float: left;
+
 }
 
 .viewImageInfo{

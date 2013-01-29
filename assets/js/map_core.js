@@ -87,11 +87,8 @@ var omsOptions = {
 }
 
 $('#page-viewRoute').live('pageshow', function(event){
-	sortMapHeight()
 	createMapRoute()
 	activeMap = maps.routeMap
-	
-	
 })
 
 $('#page-searchRoute').live('pageshow', function(event){
@@ -104,13 +101,6 @@ $('#page-createByHand').live('pageshow', function(event){
 	createMapByHand()
 	activeMap = maps.createMap
 	
-	
-})
-
-$('#page-createTracked').live('pageshow', function(event){
-	sortMapHeight()
-	createMapTracked()
-	activeMap = maps.trackedMap
 	
 })
 
@@ -169,7 +159,7 @@ function loadRoute(data, messageTarget){
 		maps.routeMap.route.setMap(maps.routeMap); //assign route poly to route map
 		buildPathFromCoords(data, maps.routeMap.route)
 		setPathEndMarker(data, maps.routeMap)
-		pageHeader(data.name)
+		$.mobile.activePage.find('.map_page_content h3').html(data.name)
 		$.mobile.activePage.find('#routeInfo p').html(routeInfoHTML(data))
 		createFavDoneButtons(data.id, data.fav, data.done)
 
