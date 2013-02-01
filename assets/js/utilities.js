@@ -13,7 +13,11 @@ $(document).on('pageinit','[data-role=page]', function(){
 
 
 
+
 function validateField(field, fieldName, messageTarget, rule, required, min, max){
+	if(messageTarget != null){
+		messageTarget.html('&nbsp;')
+	}
 	var text = field.val()
 	if(required){
 		if (text==null || text==''){
@@ -243,3 +247,9 @@ function avgArray(arr){
 	}
 	return total / i
 }
+
+function showInfoField(num){
+	$('.info_showing').removeClass('.info_showing').hide()
+	$('#infoField_'+num).show().addClass('info_showing')
+}
+

@@ -105,11 +105,9 @@ $('#page-createByHand').live('pageshow', function(event){
 })
 
 $('#page-notesphotos').live('pageshow', function(event){
-	sortMapHeight('.map_page_nonmap')
 	createMapNotesPhotos()
 	activeMap = maps.noteMap
 	fillImgPopup()
-	
 })
 
 //kill gps when not on a relevant page, to save battery
@@ -510,7 +508,7 @@ function createMapByHand(){
 			maps.createMap.panTo(createLine.getPath().getAt(0))
 			maps.createMap.setZoom(13)
 		}else{
-			goToCurrentPosition()
+			//goToCurrentPosition()
 		}
 		
 	}else{
@@ -652,7 +650,7 @@ function createMapNotesPhotos(){
 		//first page visit for notes and photos
 		enableNotesPhotos = true
 
-		goToCurrentPosition()
+		//goToCurrentPosition()
 		newItemMarker = new google.maps.Marker({
 			position: maps.noteMap.getCenter(),
 			title: 'New item created here',

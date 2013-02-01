@@ -375,3 +375,12 @@ div[data-role="page"]{
 	-khtml-border-radius: 10px;
 	border-radius: 10px;
 }
+
+.infoField{
+	
+}
+
+.notePhoto_infoFields{
+	border-bottom: #666 1px solid;
+	width: 80%;
+}

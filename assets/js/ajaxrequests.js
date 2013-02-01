@@ -253,7 +253,6 @@ function sendNewNote(title, priv, content, lat, lng){
 }
 
 function successNewNote(data, messageTarget){
-	$('#notesPhotos-newNote').popup('close')
 	setEnableNotesPhotos(true)
 	alert('Note Created!')
 }
@@ -270,8 +269,6 @@ function sendNewImage(title, priv, text, lat, lng, file){
 }
 
 function successNewImage(data, messageTarget){
-	$('#notesPhotos-newImage').popup('close')
-	clearPhotoUploadPopup()
 	setEnableNotesPhotos(true)
 	alert('Image Created!')
 }
@@ -323,8 +320,10 @@ function deleteItem(api, id, imageString){
 		}else if(api == 'route'){
 			successFunc = successDelRoute
 		}
-
-		sendAjax(data, deleteMessageTarget, successFunc, 'delete'+api, 'POST', true)
+		if(api != 'image'){//if image, sendAjax is called upon imgur success
+			sendAjax(data, deleteMessageTarget, successFunc, 'delete'+api, 'POST', true)
+		}
+		
 	}
 	
 }
@@ -339,6 +338,7 @@ function successDelNote(data, messageTarget){
 	infowindow.close()
 	activeMarker.setMap(null)
 	activeMap.setZoom(activeMap.getZoom())
+	setEnableNotesPhotos(true)
 }
 
 function successDelImgur(rambledata, data, messageTarget){
@@ -363,6 +363,10 @@ function sendTrackData(speed, altitude){
 //and function for what to do on success
 function sendAjax(data, messageTarget, successFunc, apiLocation, reqType, useAuth){
 	showAjaxLoad(true)
+	if(messageTarget != null){
+		messageTarget.html('&nbsp;')
+	}
+	
 	var auth=''
 	if(useAuth){
 		user = window.localStorage.getItem("user")
@@ -401,6 +405,9 @@ function sendImgur(rambledata, img, messageTarget){
 	//gonna run out of memory in lots of devices.
 
 	showAjaxLoad(true)
+	if(messageTarget != null){
+		messageTarget.html('&nbsp;')
+	}
 
 	data = JSON.stringify({
 		image: img,
@@ -437,6 +444,9 @@ function sendImgur(rambledata, img, messageTarget){
 
 function deleteImgur(rambledata, imageString, successFunc, messageTarget){
 	showAjaxLoad(true)
+	if(messageTarget != null){
+		messageTarget.html('&nbsp;')
+	}
 	var imgData = imageString.split('|')
 	var url = 'https://api.imgur.com/3/image/'+imgData[1]+'?_fake_status=200'
 
