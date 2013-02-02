@@ -305,8 +305,8 @@ div[data-role="page"]{
 
 .routes_text{
 	position: absolute;
-	width:50%;
-	right:79px;
+	width:579px;
+	right:0px;
 	top:15px;
 	cursor: pointer;
 }

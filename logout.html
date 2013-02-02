@@ -41,21 +41,23 @@
 			<div class="ramble_header_btngroup">
 				<div data-role="controlgroup" data-type="horizontal" data-inline="true" data-mini="true">
 					<a href="home.html" data-role="button">Dashboard</a>
+					<a href="account.html" class="accountBtn" data-role="button">Account</a>
 					<a href="login.html" class="loginLogout" data-role="button">Login</a>
 				</div>
 			</div>
+			<div class="logo_ribbon"><a href="index.html"><img src="assets/images/rambleon-logo-header.png" /></a></div>
 		</div>
 		<div class="ramble_header_shadow"></div>
-		<div class="logo_ribbon"><a href="index.html"><img src="assets/images/rambleon-logo-header.png" /></a></div>
+		
 	</div><!-- /header -->
 
 	<div data-role="content" class="ui-content">	
 		
-		<h1>Logout</h1>
+		<h2>Logout</h2>
 		<div class="formcontainer">
-			<h3>Current User: <span id="settingsUserName"></span></h3>
+			<h3>Current User: <span id="logoutUserName"></span></h3>
 			<script type="text/javascript">
-				document.getElementById('settingsUserName').innerHTML = window.localStorage.getItem("user")
+				document.getElementById('logoutUserName').innerHTML = window.localStorage.getItem("user")
 			</script>
 			<div class="formbutton_holder">
 				<a href="#" onClick="logout()" data-theme="a" data-role="button">Logout</a>

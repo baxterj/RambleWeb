@@ -9,9 +9,10 @@ $('div[data-role="page"]').live('pageshow', function(event, data){
 		$('.footer_content').html(footerContent)
 	}
 	loggedInOutButton()
+	accountButton()
 })
 
-$('#page-home, #logoutPage, #page-createByHand, #page-routesList, #page-notesphotos, #page-viewRoute, #page-searchRoute, #page-viewImage').live('pageshow', function(event, data){
+$('#page-home, #logoutPage, #page-createByHand, #page-routesList, #page-notesphotos, #page-viewRoute, #page-searchRoute, #page-viewImage, #page-account, #page-stats').live('pageshow', function(event, data){
 	redirectLoggedOut()
 })
 
@@ -19,7 +20,7 @@ $('#loginPage, #registerPage, #forgotPage').live('pageshow', function(event, dat
 	redirectLoggedIn()
 })
 
-$('#indexPage').live('pageshow', function(event, data){
+$('#indexPage').live('pageinit', function(event, data){
 	$('#slider').nivoSlider({
 		effect: 'fade',
 		pauseTime: 5000,
@@ -89,6 +90,12 @@ function loggedInOutButton(){
 	}else{
 		$.mobile.activePage.find('.loginLogout span span').html('Login')
 		$.mobile.activePage.find('.loginLogout').attr('href', 'login.html')
+	}
+}
+
+function accountButton(){
+	if(!checkLoggedIn()){
+		$.mobile.activePage.find('.accountBtn').remove()
 	}
 }
 

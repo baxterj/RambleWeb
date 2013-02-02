@@ -32,17 +32,22 @@ function validateField(field, fieldName, messageTarget, rule, required, min, max
 		}
 	}
 	if(max){
-		if(text.length > max){
-			messageTarget.html(fieldName + ' must be max ' + max + ' characters')
-			return false
+		if(required || text.length > 0){
+			if(text.length > max){
+				messageTarget.html(fieldName + ' must be max ' + max + ' characters')
+				return false
+			}
 		}
 	}
 
 	if(rule){
-		if(!testInputRule(rule, text)){
-			messageTarget.html(fieldName + ' contains invalid characters')
-			return false
+		if(required || text.length > 0){
+			if(!testInputRule(rule, text)){
+				messageTarget.html(fieldName + ' contains invalid characters')
+				return false
+			}
 		}
+		
 	}
 
 	return true

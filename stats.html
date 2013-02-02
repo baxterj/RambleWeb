@@ -2,7 +2,7 @@
 <html>
 <meta charset="UTF-8">
 <head> 
-	<title>RambleOnline - Register</title> 
+	<title>RambleOnline - Statistics</title> 
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<link rel="stylesheet" href="assets/css/jquery.mobile-1.2.0.min.css" />
 	<link rel="stylesheet" href="assets/css/core.css" />
@@ -34,22 +34,7 @@
 </head> 
 <body>
 
-<div data-role="page" id="registerPage">
-	<script type="text/javascript">
-		function sendRegFormData(){
-			if(validateRegForm($('#regMessage'))){
-				data = [$('#regUser').val(), $('#regPass').val(), $('#regEmail').val()]
-				sendRegister(data, $('#regMessage'))
-			}
-		}
-		function validateRegForm(messageTarget){
-			return validateField($('#regUser'), 'Username', messageTarget, 'alphanum', true, 4, 20) &&
-				validateField($('#regPass'), 'Password', messageTarget, 'password', true, 4, 40) &&
-				validateField($('#regEmail'), 'Email', messageTarget, 'email', true, 6, 254) &&
-				fieldsEqual($('#regPass'), $('#confPass'), 'Passwords', messageTarget) &&
-				fieldsEqual($('#regEmail'), $('#confEmail'), 'Emails', messageTarget)
-		}
-	</script>
+<div data-role="page" id="page-stats">
 
 	<div class="ramble_header">
 		<div class="ramble_header_content">
@@ -66,23 +51,51 @@
 		
 	</div><!-- /header -->
 
+
+
 	<div data-role="content" class="ui-content">	
-		
-		<h1>Register</h1>
-		<div class="formcontainer">
-			<form>
-				Username: <input type="text" name="regUser" id="regUser" data-mini="true">
-				Password: <input type="password" name="regPass" id="regPass" data-mini="true">
-				Confirm Password: <input type="password" name="confPass" id="confPass" data-mini="true">
-				Email: <input type="email" name="email" id="regEmail" data-mini="true">
-				Confirm Email: <input type="email" name="confEmail" id="confEmail" data-mini="true">
-				<p id="regMessage" class="errorMessage">&nbsp;</p>
-			</form>
-			<div class="formbutton_holder">
-				<button onClick="sendRegFormData()" name="Send" data-theme="a" data-mini="true" data-icon="plus">Create</button>
+		<div class="general_routes_nav">
+				<div data-role="controlgroup" data-type="horizontal" data-mini="true">
+					<a href="home.html" data-role="button" data-icon="home" data-inline="true">Dashboard</a>
+					<a href="byHand.html" data-role="button" data-icon="plus" data-inline="true">New Route</a>
+					<a href="search.html" data-role="button" data-icon="search" data-inline="true">Route Search</a>
+					<a href="myRoutes.html" data-role="button" data-icon="star" data-inline="true">My Routes</a>
+					<a href="notesPhotos.html" data-role="button" data-icon="grid" data-inline="true">Notes &amp; Photos</a>
+				</div>
 			</div>
-			
+		<div class="map_page_content">
+			<h2>Statistics</h2>
+			<div id="chartcontainer">Chart</div>
+			<script type="text/javascript" src="assets/js/jscharts.js"></script>
+			<script type="text/javascript">
+				var myData = new Array([10, 20], [15, 10], [20, 30], [25, 10], [30, 5]);
+				//var myData2 = new Array([1, 2], [25, 10], [3, 20], [25, 10], [50, 5]);
+				var myChart = new JSChart('chartcontainer', 'line');
+				myChart.setDataArray(myData, 'Speed');
+				//myChart.setDataArray(myData2, 'Altitude');
+				myChart.setSize(1000, 500);
+				myChart.setTitle('Altitude against time');
+				myChart.setLineColor('#8D9386');
+				myChart.setLineWidth(4);
+				myChart.setTitleColor('#7D7D7D');
+				myChart.setAxisColor('#9F0505');
+				myChart.setGridColor('#a4a4a4');
+				myChart.setAxisValuesColor('#333639');
+				myChart.setAxisNameColor('#333639');
+				myChart.setTextPaddingLeft(0);
+
+				myChart.setLegendDetect(true)
+				myChart.setLegendShow(true)
+
+				myChart.draw();
+			</script>
+
+
+
+
 		</div>
+		
+		
 
 
 	</div><!-- /content -->

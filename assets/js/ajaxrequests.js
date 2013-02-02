@@ -59,9 +59,9 @@ function successLoginRegister(data, messageTarget){
 
 
 function logout(){
+	$.mobile.changePage("login.html");
 	window.localStorage.removeItem("apikey");
 	window.localStorage.removeItem("user");
-	$.mobile.changePage("login.html");
 }
 
 function checkLoggedIn(){
@@ -357,6 +357,35 @@ function sendTrackData(speed, altitude){
 		'altitude': altitude
 	})
 	sendAjax(data, null, null, 'trackdata', 'POST', true)
+}
+
+function sendUpdateAccount(fieldData, messageTarget){
+	var data = {'passw': fieldData[0]}
+	if(fieldData[1] != null && fieldData[1] != ''){
+		data.newpassw = fieldData[1]
+	}
+	if(fieldData[2] != null && fieldData[2] != ''){
+		data.email = fieldData[2]
+	}
+	console.log(data)
+	data = JSON.stringify(data)
+	sendAjax(data, messageTarget, successAccUpdate, 'updateaccount', 'POST', true)
+}
+
+function successAccUpdate(data, messageTarget){
+	alert('Account Succesfully Updated!')
+}
+
+function sendDeleteAccount(passw, messageTarget){
+	var data = JSON.stringify({
+		'passw': passw
+	})
+	sendAjax(data, messageTarget, successDelAccUpdate, 'deleteaccount', 'POST', true)
+}
+
+function successDelAccUpdate(data, messageTarget){
+	logout()
+	alert('Account Succesfully Deleted!\n\nYou have been returned to Login')
 }
 
 //Generic function for sending ajax requests, pass error message display target

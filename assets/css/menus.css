@@ -250,3 +250,9 @@
 	position: relative;
 	top:5px;
 }
+
+
+#chartcontainer{
+	width: 100%;
+	height: 400px;
+}
