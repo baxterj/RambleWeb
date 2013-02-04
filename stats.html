@@ -65,30 +65,29 @@
 			</div>
 		<div class="map_page_content">
 			<h2>Statistics</h2>
-			<div id="chartcontainer">Chart</div>
+			<div class="graph_options">
+				<div class="tripSelect_holder">
+					<select id="tripSelect">
+						<option value="-1">loading trips...</option>
+					</select>
+				</div>
+				<div class="graphFilter_holder">
+					<div class="f_left">
+						<label class="checkbox_holder" ><input type="checkbox" name="showSpeed" id="showSpeed" class="graphFilter" checked="true" />Speed</label>
+					</div>
+
+				
+					<div class="f_left">
+						<label class="checkbox_holder"><input type="checkbox" name="showAltitude" id="showAltitude" class="graphFilter" />Altitude</label>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+				
+
+			<div id="chartcontainer">loading chart...</div>
 			<script type="text/javascript" src="assets/js/jscharts.js"></script>
-			<script type="text/javascript">
-				var myData = new Array([10, 20], [15, 10], [20, 30], [25, 10], [30, 5]);
-				//var myData2 = new Array([1, 2], [25, 10], [3, 20], [25, 10], [50, 5]);
-				var myChart = new JSChart('chartcontainer', 'line');
-				myChart.setDataArray(myData, 'Speed');
-				//myChart.setDataArray(myData2, 'Altitude');
-				myChart.setSize(1000, 500);
-				myChart.setTitle('Altitude against time');
-				myChart.setLineColor('#8D9386');
-				myChart.setLineWidth(4);
-				myChart.setTitleColor('#7D7D7D');
-				myChart.setAxisColor('#9F0505');
-				myChart.setGridColor('#a4a4a4');
-				myChart.setAxisValuesColor('#333639');
-				myChart.setAxisNameColor('#333639');
-				myChart.setTextPaddingLeft(0);
 
-				myChart.setLegendDetect(true)
-				myChart.setLegendShow(true)
-
-				myChart.draw();
-			</script>
 
 
 

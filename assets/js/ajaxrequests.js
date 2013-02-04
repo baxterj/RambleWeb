@@ -359,6 +359,15 @@ function sendTrackData(speed, altitude){
 	sendAjax(data, null, null, 'trackdata', 'POST', true)
 }
 
+function getTrackData(messageTarget){
+	sendAjax(null, messageTarget, successGetTrackData, 'trackdata', 'GET', true)
+}
+
+
+function successGetTrackData(data, messageTarget){
+	loadGraph(data)
+}
+
 function sendUpdateAccount(fieldData, messageTarget){
 	var data = {'passw': fieldData[0]}
 	if(fieldData[1] != null && fieldData[1] != ''){
@@ -380,13 +389,18 @@ function sendDeleteAccount(passw, messageTarget){
 	var data = JSON.stringify({
 		'passw': passw
 	})
-	sendAjax(data, messageTarget, successDelAccUpdate, 'deleteaccount', 'POST', true)
+	if(confirm('Are you sure? There is no way of recovering a deleted account')){
+		sendAjax(data, messageTarget, successDelAccUpdate, 'deleteaccount', 'POST', true)	
+	}
+	
 }
 
 function successDelAccUpdate(data, messageTarget){
 	logout()
 	alert('Account Succesfully Deleted!\n\nYou have been returned to Login')
 }
+
+
 
 //Generic function for sending ajax requests, pass error message display target
 //and function for what to do on success

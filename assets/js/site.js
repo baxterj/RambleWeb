@@ -1,4 +1,6 @@
 var footerContent
+var myChart = null
+var loadedTripsData = null
 
 $(document).ready(function(){
 	$('.footer_content').html(genFooterHtml())
@@ -28,6 +30,16 @@ $('#indexPage').live('pageinit', function(event, data){
 		animSpeed: 500
 	})
 })
+
+$('#page-stats').live('pageshow', function(event, data){
+	getTrackData()
+	$('#tripSelect').change(function(){
+		if(loadedTripsData != null){
+			updateGraph(loadedTripsData)
+		}
+	})
+})
+
 
 var routesSelectLinks = ['byHand.html', 'search.html', 'myRoutes.html?list=saved', 'myRoutes.html?list=fav']
 
@@ -112,4 +124,90 @@ function preloadImages(){
 	for(var i = 0; i < urls.length; i++){
 		imgObj.src=urls[i]
 	}
+}
+
+function loadGraph(data){
+	
+	var trips = normaliseGraphData(data)
+	loadedTripsData = trips
+
+	var html = ''
+	if(trips.length < 1){
+		html = '<option value="-1">No Trips Found</option>\n'
+	}else{
+		for(var i = 0; i < trips.length; i++){
+			html += '<option value="' + i + '">'+ (i+1) +': ' + trips[i].date + '</option>'
+		}
+	}
+	$('#tripSelect').html(html).selectmenu('refresh', true);
+	
+
+	updateGraph(trips)
+}
+
+function updateGraph(trips){
+	myChart = null
+	createChart()
+	$('#chartcontainer').html()
+
+	if($("#showSpeed").attr("checked")){
+		myChart.setDataArray(trips[$('#tripSelect').val()].speedPoints, 'Speed')
+	}
+
+	if($("#showAltitude").attr("checked")){
+		myChart.setDataArray(trips[$('#tripSelect').val()].altitudePoints, 'Altitude')
+	}
+
+	
+	
+	myChart.draw()
+}
+
+
+
+function createChart(){
+	//var myData = new Array([10, 20], [15, 10], [20, 30], [25, 10], [30, 5]);
+	myChart = new JSChart('chartcontainer', 'line');
+	//myChart.setDataArray(myData, 'Speed');
+	myChart.setSize(1000, 500);
+	myChart.setTitle('Statistics against Time');
+	myChart.setLineColor('#8D9386');
+	myChart.setLineWidth(4);
+	myChart.setTitleColor('#7D7D7D');
+	myChart.setAxisColor('#9F0505');
+	myChart.setGridColor('#a4a4a4');
+	myChart.setAxisValuesColor('#333639');
+	myChart.setAxisNameColor('#333639');
+	myChart.setTextPaddingLeft(0);
+
+	myChart.setLegendDetect(true)
+	myChart.setLegendShow(true)
+
+	// myChart.draw();
+}
+
+function normaliseGraphData(data){
+	//var s = data.objects[0].dateRecorded.split(' ')//day month year hour min sec
+	var startDate = new Date(1990, 1, 1, 1, 1, 1)
+	var trips = new Array()
+	var tripCounter = -1
+	for(var i = 0; i < data.objects.length; i++){
+		var c = data.objects[i].dateRecorded.split(' ')//day month year hour min sec
+		var thisDate = new Date(c[2], c[1], c[0], c[3], c[4], c[5])
+		var xOffset = Math.ceil(thisDate - startDate) / 1000 //calculate to second precision
+		if(xOffset > 600){ //if ten minutes between readings, make a new trip
+			tripCounter++
+			startDate = thisDate
+			trips[tripCounter] = {
+				date: startDate.toUTCString(),
+				speedPoints: [[0, parseInt(data.objects[i].speed)]],
+				altitudePoints: [[0, parseInt(data.objects[i].altitude)]]
+			}
+		}else{
+			trips[tripCounter].speedPoints.push([xOffset, parseInt(data.objects[i].speed)])
+			trips[tripCounter].altitudePoints.push([xOffset, parseInt(data.objects[i].altitude)])
+		}
+	}
+	return trips
+
 }
