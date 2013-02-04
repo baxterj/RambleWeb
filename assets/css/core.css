@@ -86,7 +86,7 @@ div[data-role="page"]{
 }
 
 .footer_content{
-	padding-top:40px;
+	padding-top:32px;
 	width: 1000px;
 	margin:0 auto;
 	text-align: center;
@@ -325,6 +325,14 @@ div[data-role="page"]{
 
 .greenBG{
 	background-color: rgba(5,100,5,0.2);
+	-moz-border-bottom-right-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+	-khtml-border-bottom-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	-moz-border-top-right-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
+	-khtml-border-top-right-radius: 10px;
+	border-top-right-radius: 10px;
 }
 
 .other_features{
@@ -335,6 +343,10 @@ div[data-role="page"]{
 	font-size: 18px;
 	height: 300px;
 	padding-bottom: 30px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	border-radius: 10px;
 }
 
 

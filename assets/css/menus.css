@@ -251,10 +251,18 @@
 	top:5px;
 }
 
-
-#chartcontainer{
+.chartholder{
 	width: 100%;
+	text-align: center;
+}
+#chartcontainer{
+	width: 80%;
 	height: 400px;
+	margin: 0 auto;
+}
+
+#JSChart_chartcontainer{
+	margin: 0 auto !important; 
 }
 
 .tripSelect_holder{

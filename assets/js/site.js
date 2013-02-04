@@ -38,6 +38,12 @@ $('#page-stats').live('pageshow', function(event, data){
 			updateGraph(loadedTripsData)
 		}
 	})
+
+	$('.graphFilter').change(function(){
+		if(loadedTripsData != null){
+			updateGraph(loadedTripsData)
+		}
+	})
 })
 
 
@@ -136,7 +142,11 @@ function loadGraph(data){
 		html = '<option value="-1">No Trips Found</option>\n'
 	}else{
 		for(var i = 0; i < trips.length; i++){
-			html += '<option value="' + i + '">'+ (i+1) +': ' + trips[i].date + '</option>'
+			var selected=''
+			if(i == trips.length-1){
+				selected='selected="selected"'
+			}
+			html += '<option value="' + i + '"'+selected+'>'+ (i+1) +': ' + trips[i].date + '</option>'
 		}
 	}
 	$('#tripSelect').html(html).selectmenu('refresh', true);
@@ -146,19 +156,20 @@ function loadGraph(data){
 }
 
 function updateGraph(trips){
-	myChart = null
 	createChart()
-	$('#chartcontainer').html()
-
+	var noneChecked=true
 	if($("#showSpeed").attr("checked")){
 		myChart.setDataArray(trips[$('#tripSelect').val()].speedPoints, 'Speed')
+		noneChecked=false
 	}
 
 	if($("#showAltitude").attr("checked")){
 		myChart.setDataArray(trips[$('#tripSelect').val()].altitudePoints, 'Altitude')
+		noneChecked=false
 	}
-
-	
+	if(noneChecked){
+		myChart.setDataArray([[0,0], [0,0]], 'None Selected')
+	}
 	
 	myChart.draw()
 }
@@ -169,16 +180,24 @@ function createChart(){
 	//var myData = new Array([10, 20], [15, 10], [20, 30], [25, 10], [30, 5]);
 	myChart = new JSChart('chartcontainer', 'line');
 	//myChart.setDataArray(myData, 'Speed');
-	myChart.setSize(1000, 500);
+	myChart.setSize(800, 400);
 	myChart.setTitle('Statistics against Time');
-	myChart.setLineColor('#8D9386');
+	myChart.setLineColor('#DD0000', 'Speed');
+	myChart.setLineColor('#0000DD', 'Altitude');
 	myChart.setLineWidth(4);
 	myChart.setTitleColor('#7D7D7D');
 	myChart.setAxisColor('#9F0505');
 	myChart.setGridColor('#a4a4a4');
 	myChart.setAxisValuesColor('#333639');
 	myChart.setAxisNameColor('#333639');
-	myChart.setTextPaddingLeft(0);
+	myChart.setLabelFontSize(12)
+	myChart.setLabelColor('#333333')
+	myChart.setLabelX([0, 'Trip Start']);
+	myChart.setLabelPaddingBottom(15)
+	myChart.setLineSpeed(97)
+
+	myChart.setAxisNameY('Altitude(m), Speed(m/s)', true)
+	myChart.setAxisNameX('Seconds since trip start')
 
 	myChart.setLegendDetect(true)
 	myChart.setLegendShow(true)

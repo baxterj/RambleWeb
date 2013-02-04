@@ -58,14 +58,16 @@
 				<div data-role="controlgroup" data-type="horizontal" data-mini="true">
 					<a href="home.html" data-role="button" data-icon="home" data-inline="true">Dashboard</a>
 					<a href="byHand.html" data-role="button" data-icon="plus" data-inline="true">New Route</a>
-					<a href="search.html" data-role="button" data-icon="search" data-inline="true">Route Search</a>
+					<a href="search.html" data-role="button" data-icon="search" data-inline="true">Search</a>
 					<a href="myRoutes.html" data-role="button" data-icon="star" data-inline="true">My Routes</a>
 					<a href="notesPhotos.html" data-role="button" data-icon="grid" data-inline="true">Notes &amp; Photos</a>
+					<a href="stats.html" data-role="button" class="ui-btn-active ui-state-persist" data-icon="info" data-inline="true">Stats</a>
 				</div>
 			</div>
 		<div class="map_page_content">
 			<h2>Statistics</h2>
 			<div class="graph_options">
+				<div>Select Trip date:</div>
 				<div class="tripSelect_holder">
 					<select id="tripSelect">
 						<option value="-1">loading trips...</option>
@@ -83,11 +85,19 @@
 				</div>
 				<div class="clear"></div>
 			</div>
-				
-
-			<div id="chartcontainer">loading chart...</div>
+				<hr/>
+			<div class="chartholder">
+				<div id="chartcontainer">loading chart...</div>
+			</div>
 			<script type="text/javascript" src="assets/js/jscharts.js"></script>
-
+			<hr/>
+			<div class="about_stats">
+				<h3>About stats</h3>
+				<p>Ramble Online collects your speed and altitude whilst your position is shown by an arrow on the map.</p>
+				<p>Upon recording inside the App, these stats are averaged over a period of approximately 30 seconds, to hopefully eliminate any outliers.</p>
+				<p>The <b>Trips</b> selector separates your data out into chunks where there has been at least ten minutes between receiving speed/altitude information.  This should mean your separate trips get their own separate graphs.</p>
+				<p>Please note that altitude data obtained by some android models can be inconsistent, due to hardware limitations.</p>
+			</div>
 
 
 
