@@ -1,5 +1,3 @@
-var TESTVAR
-
 var activeMap;
 var mapZoom = 10;
 var maps = {
@@ -159,7 +157,7 @@ function loadRoute(data, messageTarget){
 		setPathEndMarker(data, maps.routeMap)
 		$.mobile.activePage.find('.map_page_content h3').html(data.name)
 		$.mobile.activePage.find('#routeInfo p').html(routeInfoHTML(data))
-		createFavDoneButtons(data.id, data.fav, data.done)
+		createFavDoneButtons(data.id, data.fav, data.done, data.favCount, data.doneCount)
 
 		if(userOwns(data.owner.username)){
 			createDeleteButton('route', data.id, null, null)
@@ -235,22 +233,32 @@ function drawRoutes(data, messageTarget){
 
 //used for search map
 function showRouteContent(marker){
+	var data = routesContent[marker.num]//this will contain info & first pathpoint
+
+	getRoute(data.id, loadSearchRoute)
+
 	if(maps.searchMap.route != null){
 		maps.searchMap.route.setMap(null)
 	}
 	
-
-	var data = routesContent[marker.num]
 	maps.searchMap.setCenter(new google.maps.LatLng(data.pathpoints[0].lat, data.pathpoints[0].lng))
-	maps.searchMap.route = makePolyLine('#DD0000', false)
+	maps.searchMap.setZoom(15)
+
+	$.mobile.activePage.find('#search-routeInfo p').html(routeInfoHTML(data))
+	createFavDoneButtons(data.id, data.fav, data.done, data.favCount, data.doneCount)
+	$.mobile.activePage.find('.search_routelink a').attr('href', 'route.html?id='+data.id)
+	if(firstRoutePreview){
+		firstRoutePreview = false
+		$.mobile.activePage.find('#search-routeInfo').popup("open", { positionTo: '#search-popupbtn' })
+	}
+
+}
+
+function loadSearchRoute(data, messageTarget){
+	maps.searchMap.route = makePolyLine('#FF0000', false)
 	maps.searchMap.route.setMap(maps.searchMap); //assign route poly to route map
 	buildPathFromCoords(data, maps.searchMap.route)
 	setPathEndMarker(data, maps.searchMap)
-	maps.searchMap.setZoom(15)
-	$.mobile.activePage.find('#search-routeInfo p').html(routeInfoHTML(data))
-	createFavDoneButtons(data.id, data.fav, data.done)
-	$.mobile.activePage.find('.search_routelink a').attr('href', 'route.html?id='+data.id)
-
 }
 
 function drawNotes(data, messageTarget){
@@ -666,11 +674,15 @@ function createMapNotesPhotos(){
 
 
 
-function createFavDoneButtons(routeID, fav, done){
+function createFavDoneButtons(routeID, fav, done, favCount, doneCount){
 	$.mobile.activePage.find('.route_favbuttons .favBtn img').attr('src', 'assets/images/fav_'+fav+'_mini.png')
 	$.mobile.activePage.find('.route_favbuttons .doneBtn img').attr('src', 'assets/images/done_'+done+'_mini.png')
 	$.mobile.activePage.find('.route_favbuttons .favBtn').attr('onClick', 'flipFavBtn('+routeID+', '+!fav+')')
 	$.mobile.activePage.find('.route_favbuttons .doneBtn').attr('onClick', 'flipDoneBtn('+routeID+', '+!done+')')
+	if($.mobile.activePage.attr('id') == 'page-searchRoute'){
+		$.mobile.activePage.find('.route_favbuttons .doneBtn').append(doneCount)
+		$.mobile.activePage.find('.route_favbuttons .favBtn').append(favCount)
+	}
 }
 
 function flipFavBtn(routeID, bool){

@@ -40,10 +40,21 @@
 
 .routelist_fav, .routelist_done {
 	display: block;
-	width:20px;
+	min-width:20px;
 	height:19px;
 	float:left;
+	padding-left: 25px;
+	background-repeat:no-repeat;
+	background-position: 0px -1px;
+	padding-right: 2px;
 }
+
+.routelist_column{
+	float: left;
+	width: 50%;
+}
+
+
 
 .fav_true{
 	background-image: url('../images/fav_true_mini.png')
@@ -91,6 +102,7 @@
 	margin-left: 5px;
 	position: relative;
 	top:4px;
+	left: -2px;
 }
 
 

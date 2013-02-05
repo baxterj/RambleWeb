@@ -161,6 +161,7 @@ function updateGraph(trips){
 	if($("#showSpeed").attr("checked")){
 		myChart.setDataArray(trips[$('#tripSelect').val()].speedPoints, 'Speed')
 		noneChecked=false
+		//console.log(trips[$('#tripSelect').val()].speedPoints)
 	}
 
 	if($("#showAltitude").attr("checked")){
@@ -208,24 +209,27 @@ function createChart(){
 function normaliseGraphData(data){
 	//var s = data.objects[0].dateRecorded.split(' ')//day month year hour min sec
 	var startDate = new Date(1990, 1, 1, 1, 1, 1)
+	var prevDate = startDate
 	var trips = new Array()
 	var tripCounter = -1
 	for(var i = 0; i < data.objects.length; i++){
 		var c = data.objects[i].dateRecorded.split(' ')//day month year hour min sec
-		var thisDate = new Date(c[2], c[1], c[0], c[3], c[4], c[5])
+		var thisDate = new Date(c[2], c[1]-1, c[0], c[3], c[4], c[5])//-1 cause months start at 0
 		var xOffset = Math.ceil(thisDate - startDate) / 1000 //calculate to second precision
-		if(xOffset > 600){ //if ten minutes between readings, make a new trip
+		var lastOffset = Math.ceil(thisDate - prevDate) / 1000 //calculate to second precision
+		if(lastOffset > 600){ //if ten minutes between readings, make a new trip
 			tripCounter++
 			startDate = thisDate
 			trips[tripCounter] = {
 				date: startDate.toUTCString(),
-				speedPoints: [[0, parseInt(data.objects[i].speed)]],
-				altitudePoints: [[0, parseInt(data.objects[i].altitude)]]
+				speedPoints: [[0, parseFloat(data.objects[i].speed)]],
+				altitudePoints: [[0, parseFloat(data.objects[i].altitude)]]
 			}
-		}else{
-			trips[tripCounter].speedPoints.push([xOffset, parseInt(data.objects[i].speed)])
-			trips[tripCounter].altitudePoints.push([xOffset, parseInt(data.objects[i].altitude)])
+		}else{//STARTDATE SHOULD BECOME LASTDATE OR SOMETHING
+			trips[tripCounter].speedPoints.push([xOffset, parseFloat(data.objects[i].speed)])
+			trips[tripCounter].altitudePoints.push([xOffset, parseFloat(data.objects[i].altitude)])
 		}
+		prevDate = thisDate
 	}
 	return trips
 

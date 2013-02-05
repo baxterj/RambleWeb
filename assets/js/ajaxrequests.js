@@ -147,14 +147,21 @@ function successRoutesList(data, messageTarget){
 function createRouteListItem(route){
 	var html = '<li>\n'
 	html += '<a href="route.html?id='+route.id+'">\n'
+//	html += '<div class="routelist_column">\n'
 	html += '<div class="routelist_title">' + route.name + '</div>\n'
 	html += '<div class="routelist_owner'+isUserClass(route.owner.username)+'">Owner: ' + route.owner.username + '</div>\n'
 	html += '<div class="routelist_icons">\n'
-	html += '<div class="routelist_fav fav_'+route.fav+'"></div>\n'
-	html += '<div class="routelist_done done_'+route.done+'"></div>\n'
+	html += '<div class="routelist_fav fav_'+route.fav+'">'+route.favCount+'</div>\n'
+	html += '<div class="routelist_done done_'+route.done+'">'+route.doneCount+'</div>\n'
 	html += '</div>\n'
 	html += '<div class="routelist_keywords">Keywords: ' + route.keywords.join(" ")+'</div>\n'
-	html += '<div class="mapThumb" id="mapThumb'+route.id+'"></div>\n'
+//	html += '</div>\n'//end routelist_column
+
+//	html += '<div class="routelist_column">\n'
+//	html += '<div>Favourited: '
+//	html += '</div>\n'//end routelist_column
+
+	//html += '<div class="mapThumb" id="mapThumb'+route.id+'"></div>\n'
 	//html += '<a href="#" onClick="showMapThumbnail('+route.id+')" data-icon="grid" data-iconpos="right" title="Map"></a>\n'
 	html += '</a></li>\n'
 	return html
@@ -211,7 +218,7 @@ function getSearchRoutes(map){
 		}
 	}
 	
-	sendAjax(data, null, drawRoutes, 'route', 'GET', true)
+	sendAjax(data, null, drawRoutes, 'searchroute', 'GET', true)
 }
 
 function sendNewRoute(line, name, priv, keywords){
