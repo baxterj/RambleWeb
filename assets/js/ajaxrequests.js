@@ -20,6 +20,10 @@ $('#page-viewImage').live('pageshow', function(event){
 	setTimeout("getImage(getUrlVars()['id'])", 500); //url vars dont load before this event fires so we wait
 })
 
+$('#sharePage').live('pageshow', function(event){
+	$('#shareTitle').html('Route Title: ' + activeRouteData.name)
+})
+
 
 
 function sendForgot(username, messageTarget){
@@ -405,6 +409,21 @@ function sendDeleteAccount(passw, messageTarget){
 function successDelAccUpdate(data, messageTarget){
 	logout()
 	alert('Account Succesfully Deleted!\n\nYou have been returned to Login')
+}
+
+function sendShare(data, messageTarget){
+	//data[0,1,2] is message, recipient, email 
+	var data = JSON.stringify({
+		message: data[0],
+		recipient: data[1],
+		email: data[2],
+		route: activeRouteData.id
+	})
+	sendAjax(data, messageTarget, successShare, 'shareroute', 'POST', true)
+}
+
+function successShare(data, messageTarget){
+	$('#shareSendCount').html(parseInt($('#shareSendCount').html())+1)
 }
 
 

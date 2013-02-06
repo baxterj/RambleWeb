@@ -1,0 +1,96 @@
+<!DOCTYPE html> 
+<html>
+<meta charset="UTF-8">
+<head> 
+	<title>RambleOnline - Share Route</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="assets/css/jquery.mobile-1.2.0.min.css" />
+	<link rel="stylesheet" href="assets/css/core.css" />
+	<link rel="stylesheet" href="assets/css/menus.css" />
+	<script type="text/javascript" charset="utf-8" src="assets/js/cordova-2.1.0.js"></script>
+	<script src="assets/js/jquery-1.8.2.min.js"></script>
+	<script src="assets/js/jquery-mobile-config.js"></script>
+	<script src="assets/js/jquery.mobile-1.2.0.min.js"></script>
+	<script src="assets/js/ajaxrequests.js"></script>
+	
+	<script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?libraries=drawing&key=AIzaSyA1Oz8ZnLZ_mfkby54M_sdRzh8EAfAyRNA&sensor=true">
+	</script>
+
+	<script type="text/javascript" src="assets/js/oms.min.js"></script>
+
+	<script src="assets/js/utilities.js"></script>
+
+	<link rel="stylesheet" href="assets/css/map_core.css" />
+	<script src="assets/js/map_core.js"></script>
+
+
+	
+	
+</head> 
+<body>
+
+<div data-role="page" id="sharePage">
+	<script type="text/javascript">
+		function sendShareFormData(){
+			var allValid = true
+			$.mobile.activePage.find('.shareDetails').each(function(index, value){
+				if(!validateSendForm($(this), index, $('#shareMessage'))){
+					allValid = false
+					return false
+				}
+			})
+			if(allValid){
+				$.mobile.activePage.find('.shareDetails').each(function(index, value){
+					data = [$('#shareMsg').val(), $(this).find('.shareUser').val(), $(this).find('.shareEmail').val()]
+					sendShare(data, $('#shareMessage'))
+				})
+				
+			}
+			
+		}
+		function validateSendForm(detailsDiv, index, messageTarget){
+			return validateField(detailsDiv.find('.shareUser'), 'Name '+ (index+1), messageTarget, 'password', true, 1, 40) &&
+				validateField(detailsDiv.find('.shareEmail'), 'Email '+ (index+1), messageTarget, 'email', true, 6, 254) &&
+				validateField($('#shareMsg'), 'Your Message', messageTarget, 'password', false, 0, 512)
+		}
+	</script>
+
+	<div data-role="header" data-theme="d">
+		<a href="login.html" data-rel="back" data-icon="back" data-iconpos="notext">Back</a>
+		<h1>Share Route</h1>
+		<!--a href="settings.html" data-role="button" data-icon="gear" data-iconpos="notext" class="ui-btn-right"></a-->
+	</div><!-- /header -->
+
+	<div data-role="content" class="ui-content">	
+		<div style="width:80%; margin:0 auto">
+			<div id="shareTitle">Route Title: </div>
+			<form id="shareForm">
+				Your Message: (Optional)<input type="text" name="shareMsg" id="shareMsg" data-mini="true"><br />
+				<div class="shareDetails">
+					Recipient Name: <input type="text" name="shareUser" class="shareUser" data-mini="true">
+					Recipient Email: <input type="email" name="email" class="shareEmail" data-mini="true">
+					<a href="#" data-role="button" onClick="removeRecipient(this)" data-icon="minus" data-mini="true" data-inline="true">Remove</a>
+				</div>
+			</form>
+			<button href="#" onClick="addRecipient()" data-icon="plus" data-mini="true" data-inline="true">Add Another</button>
+			<p id="shareMessage" class="errorMessage">&nbsp;</p>
+			<div>Note: your account email address will be sent to recipients</div>
+			<button onClick="sendShareFormData()" name="Send" data-theme="a" data-icon="arrow-r">Send Emails</button>
+			<div class="shareSendSuccess"><span id="shareSendCount">0</span> emails sent successfully</div>
+		</div>
+
+
+	</div><!-- /content -->
+
+	
+
+	<div data-role="footer" class="ui-bar ui-footer" data-position="fixed">
+		
+		<a href="login.html" data-rel="back" data-icon="back" data-theme="d">Back</a>
+
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+</body>
+</html>

@@ -1,4 +1,3 @@
-var queuedRequests = 0
 
 function stripPX(inp){
 	return inp.split('px', [0])
@@ -7,11 +6,6 @@ function stripPX(inp){
 $(document).on('pageinit','[data-role=page]', function(){
 	$('[data-position=fixed]').fixedtoolbar({ tapToggle:false});
 });
-
-
-
-
-
 
 
 function validateField(field, fieldName, messageTarget, rule, required, min, max){
@@ -61,7 +55,7 @@ function testInputRule(rule, text){
 		var reg = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 		return reg.test(text)
 	}else if(rule == 'password'){
-		var reg = /^[\w!@#%&/(){}[\]=?+*^~\-_ .:,;]+$/
+		var reg = /^[\w!@#%&/(){}[\]=?+*^~\-_ .:,;]*$/
 		return reg.test(text)
 	}else if(rule == 'num'){
 		var reg = /^[0-9]*$/
@@ -70,8 +64,16 @@ function testInputRule(rule, text){
 	return false
 }
 
-function fieldsEqual(first, second, setName, messageTarget){
-	if(first.val() != second.val()){
+function fieldsEqual(first, second, setName, messageTarget, caseSensitive){
+	if(!caseSensitive){
+		firstVal = first.val().toLowerCase()
+		secondVal = second.val().toLowerCase()
+	}else{
+		firstVal = first.val()
+		secondVal = second.val()
+	}
+
+	if(firstVal != secondVal){
 		messageTarget.html(setName + ' must be the same')
 		return false
 	}
@@ -131,19 +133,9 @@ function routeInfoHTML(data){ //takes a route object from api/v1/route/#/
 
 function showAjaxLoad(bool){
 	if(bool){
-		// if(queuedRequests <= 0){
-		// 	queuedRequests = 1
-		// }else{
-			queuedRequests++
-		//}
 		$.mobile.activePage.find('.ramble_header').append('<div class="ajax_load"></div>')
 	}else{
-		//console.log(queuedRequests)
-		queuedRequests--
-	//	if(queuedRequests <= 0){
-			$.mobile.activePage.find('.ramble_header .ajax_load').remove()	
-	//	}
-		
+		$.mobile.activePage.find('.ramble_header .ajax_load').remove()
 	}
 }
 
@@ -231,6 +223,26 @@ function createDeleteButton(api, id, messageTarget, imageString){
 	$.mobile.activePage.find('.deleteButton').attr('onClick', clickJS)
 }
 
+function addRecipient(){
+	$.mobile.activePage.find('#shareForm').append('<div class="shareDetails">\n'+
+		'Name: <input type="text" name="regUser" class="shareUser ui-input-text ui-body-c ui-corner-all ui-shadow-inset ui-mini" data-mini="true">\n'+
+		'Email: <input type="email" name="email" class="shareEmail ui-input-text ui-body-c ui-corner-all ui-shadow-inset ui-mini" data-mini="true">\n'+
+		'<a href="#" data-role="button" onClick="removeRecipient(this)" data-icon="minus" data-mini="true" data-inline="true">Remove</a>\n' +
+		'</div>')
+	$.mobile.activePage.find('.shareDetails :last').find('a').button()
+}
+
+function removeRecipient(targetBtn){
+	$(targetBtn).parent().remove()
+}
+
+function goToSharePage(){
+	if(activeRouteData.private){
+		alert('Cannot share private route')
+	}else{
+		$.mobile.changePage("share.html")
+	}
+}
 
 function isUserClass(user){
 	if (window.localStorage.getItem('user').toLowerCase() == user.toLowerCase()){

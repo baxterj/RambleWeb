@@ -300,3 +300,8 @@
 	width:100%;
 
 }
+
+#shareTitle{
+	font-weight: bold;
+	margin-bottom: 10px;
+}

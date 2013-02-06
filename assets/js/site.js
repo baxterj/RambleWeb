@@ -159,14 +159,21 @@ function updateGraph(trips){
 	createChart()
 	var noneChecked=true
 	if($("#showSpeed").attr("checked")){
-		myChart.setDataArray(trips[$('#tripSelect').val()].speedPoints, 'Speed')
-		noneChecked=false
+		if(trips[$('#tripSelect').val()].speedPoints.length > 1){
+			myChart.setDataArray(trips[$('#tripSelect').val()].speedPoints, 'Speed')
+			noneChecked=false
+		}
+		
 		//console.log(trips[$('#tripSelect').val()].speedPoints)
 	}
 
 	if($("#showAltitude").attr("checked")){
-		myChart.setDataArray(trips[$('#tripSelect').val()].altitudePoints, 'Altitude')
-		noneChecked=false
+		if(trips[$('#tripSelect').val()].altitudePoints.length > 1){
+	//		console.log(trips[$('#tripSelect').val()])
+			myChart.setDataArray(trips[$('#tripSelect').val()].altitudePoints, 'Altitude')
+			noneChecked=false
+		}
+		
 	}
 	if(noneChecked){
 		myChart.setDataArray([[0,0], [0,0]], 'None Selected')
@@ -195,7 +202,7 @@ function createChart(){
 	myChart.setLabelColor('#333333')
 	myChart.setLabelX([0, 'Trip Start']);
 	myChart.setLabelPaddingBottom(15)
-	myChart.setLineSpeed(97)
+	myChart.setLineSpeed(100)
 
 	myChart.setAxisNameY('Altitude(m), Speed(m/s)', true)
 	myChart.setAxisNameX('Seconds since trip start')
