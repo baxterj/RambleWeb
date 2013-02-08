@@ -156,6 +156,7 @@ function loadRoute(data, messageTarget){
 		activeRouteData = data
 
 		maps.routeMap.setCenter(new google.maps.LatLng(data.pathpoints[0].lat, data.pathpoints[0].lng))
+		maps.routeMap.setZoom(14)
 		maps.routeMap.route = makePolyLine('#DD0000', false)
 		maps.routeMap.route.setMap(maps.routeMap); //assign route poly to route map
 		buildPathFromCoords(data, maps.routeMap.route)
@@ -443,21 +444,32 @@ function resetOMS(map){
 
 
 function createMapRoute(){
+	
 	var mapOptions = {
-		center: new google.maps.LatLng(50.848115, -0.11364),
-		zoom: 14,
+		center: new google.maps.LatLng(52.803280, -1.871453),
+		zoom: 6,
 		mapTypeId: google.maps.MapTypeId.TERRAIN,
 		zoomControl: true
 	};
-
+	
 	maps.routeMap = new google.maps.Map(document.getElementById("map_canvas_route"),
 		mapOptions);
 
 	//enableNotesPhotos = true
 
 	resetOMS(maps.routeMap)
-	
-	setTimeout("getRoute(getUrlVars()['id'], loadRoute)", 500); //url vars dont load before this event fires so we wait
+
+	// if(routeFromShare != 0){
+	// 	getRoute(routeFromShare, loadRoute)
+	// 	if(!keepRouteFromShare){
+	// 		routeFromShare = 0
+	// 	}
+	// }else{
+		setTimeout(function(){
+			getRoute(getUrlVars()['id'], loadRoute);
+			
+		}, 500) //url vars dont load before this event fires so we wait
+	//}
 
 	google.maps.event.addListener(maps.routeMap, 'idle', function() {
 		if(!spiderfied){

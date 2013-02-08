@@ -2,6 +2,9 @@ var footerContent
 var myChart = null
 var loadedTripsData = null
 
+var routeFromShare = 0
+var keepRouteFromShare = true
+
 $(document).ready(function(){
 	$('.footer_content').html(genFooterHtml())
 })
@@ -14,11 +17,19 @@ $('div[data-role="page"]').live('pageshow', function(event, data){
 	accountButton()
 })
 
-$('#page-home, #logoutPage, #page-createByHand, #page-routesList, #page-notesphotos, #page-viewRoute, #page-searchRoute, #page-viewImage, #page-account, #page-stats').live('pageshow', function(event, data){
+$('#page-viewRoute').live('pageshow', function(event, data){
+	if(getUrlVars()["ref"] == 'external'){
+		routeFromShare = parseInt(getUrlVars()["id"])
+		console.log(routeFromShare)
+	}
 	redirectLoggedOut()
 })
 
-$('#loginPage, #registerPage, #forgotPage').live('pageshow', function(event, data){
+$('#page-home, #logoutPage, #page-createByHand, #page-routesList, #page-notesphotos, #page-searchRoute, #page-viewImage, #page-account, #page-stats').live('pageshow', function(event, data){
+	redirectLoggedOut()
+})
+
+$('#loginPage, #registerPage, #forgotPage, #resetPassPage').live('pageshow', function(event, data){
 	redirectLoggedIn()
 })
 
@@ -138,6 +149,7 @@ function loadGraph(data){
 	loadedTripsData = trips
 
 	var html = ''
+	var numAdded = 1
 	if(trips.length < 1){
 		html = '<option value="-1">No Trips Found</option>\n'
 	}else{
@@ -146,7 +158,12 @@ function loadGraph(data){
 			if(i == trips.length-1){
 				selected='selected="selected"'
 			}
-			html += '<option value="' + i + '"'+selected+'>'+ (i+1) +': ' + trips[i].date + '</option>'
+			if(trips[i].speedPoints.length > 2){
+				html += '<option value="' + i + '"'+selected+'>'+ numAdded +': ' + trips[i].date + '</option>'
+				numAdded++
+			}
+
+			
 		}
 	}
 	$('#tripSelect').html(html).selectmenu('refresh', true);
@@ -188,6 +205,7 @@ function createChart(){
 	//var myData = new Array([10, 20], [15, 10], [20, 30], [25, 10], [30, 5]);
 	myChart = new JSChart('chartcontainer', 'line');
 	//myChart.setDataArray(myData, 'Speed');
+	myChart.setErrors(false)
 	myChart.setSize(800, 400);
 	myChart.setTitle('Statistics against Time');
 	myChart.setLineColor('#DD0000', 'Speed');
@@ -202,6 +220,7 @@ function createChart(){
 	myChart.setLabelColor('#333333')
 	myChart.setLabelX([0, 'Trip Start']);
 	myChart.setLabelPaddingBottom(15)
+	myChart.setLabelPaddingLeft(15)
 	myChart.setLineSpeed(100)
 
 	myChart.setAxisNameY('Altitude(m), Speed(m/s)', true)

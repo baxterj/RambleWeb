@@ -1,6 +1,12 @@
 html { height: 100%; margin:0; width:100%;}
 
-body { height: 100%; margin: 0; padding: 0; width:100%;}
+body { 
+	height: 100%;
+ 	margin: 0;
+ 	padding: 0;
+ 	width:100%;
+ 	font-family: Helvetica, arial, sans-serif;
+ }
 
 button, ul, div, a, img, select{
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
@@ -132,7 +138,7 @@ div[data-role="page"]{
 	margin-top: 35px;
 	float: left;
 	display: inline;
-	font-family: arial, tahoma, sans-serif;
+	/*font-family: arial, tahoma, sans-serif;*/
 }
 
 .index_welcome{
@@ -349,6 +355,9 @@ div[data-role="page"]{
 	border-radius: 10px;
 }
 
+.other_features h3{
+	margin: 0px;
+}
 
 .other_feature{
 	float: left;

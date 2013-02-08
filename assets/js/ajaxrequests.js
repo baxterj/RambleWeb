@@ -58,7 +58,14 @@ function sendRegister(data, messageTarget){
 function successLoginRegister(data, messageTarget){
 	window.localStorage.setItem("apikey", data.key)
 	window.localStorage.setItem("user", data.user)
-	$.mobile.changePage("home.html")
+	console.log(routeFromShare)
+	keepRouteFromShare = false
+	if(routeFromShare != 0){
+		window.location = "route.html?id="+routeFromShare
+	}else{
+		$.mobile.changePage("home.html")
+	}
+	
 }
 
 
@@ -150,7 +157,7 @@ function successRoutesList(data, messageTarget){
 
 function createRouteListItem(route){
 	var html = '<li>\n'
-	html += '<a href="route.html?id='+route.id+'">\n'
+	html += '<a href="route.html?id='+route.id+'" data-ajax="false">\n'
 //	html += '<div class="routelist_column">\n'
 	html += '<div class="routelist_title">' + route.name + '</div>\n'
 	html += '<div class="routelist_owner'+isUserClass(route.owner.username)+'">Owner: ' + route.owner.username + '</div>\n'
@@ -424,6 +431,18 @@ function sendShare(data, messageTarget){
 
 function successShare(data, messageTarget){
 	$('#shareSendCount').html(parseInt($('#shareSendCount').html())+1)
+}
+
+function sendResetPass(data, messageTarget){
+	var data = JSON.stringify({
+		newpassw: data[0],
+		code: data[1]
+	})
+	sendAjax(data, messageTarget, successResetPass, 'resetpassword', 'POST', true)
+}
+
+function successResetPass(data, messageTarget){
+	$('#resetConfMessage').html(data.message)
 }
 
 
