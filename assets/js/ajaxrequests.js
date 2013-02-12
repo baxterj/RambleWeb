@@ -21,7 +21,10 @@ $('#page-viewImage').live('pageshow', function(event){
 })
 
 $('#sharePage').live('pageshow', function(event){
-	$('#shareTitle').html('Route Title: ' + activeRouteData.name)
+	if(activeRouteData != null){
+		$('#shareTitle').html('Route Title: ' + activeRouteData.name)
+	}
+	
 })
 
 
@@ -420,13 +423,18 @@ function successDelAccUpdate(data, messageTarget){
 
 function sendShare(data, messageTarget){
 	//data[0,1,2] is message, recipient, email 
-	var data = JSON.stringify({
-		message: data[0],
-		recipient: data[1],
-		email: data[2],
-		route: activeRouteData.id
-	})
-	sendAjax(data, messageTarget, successShare, 'shareroute', 'POST', true)
+	if(activeRouteData != null){
+		var data = JSON.stringify({
+			message: data[0],
+			recipient: data[1],
+			email: data[2],
+			route: activeRouteData.id
+		})
+		sendAjax(data, messageTarget, successShare, 'shareroute', 'POST', true)
+	}else{
+		messageTarget.html('No Route Selected.  Access this page from the route page menu')
+	}
+	
 }
 
 function successShare(data, messageTarget){
