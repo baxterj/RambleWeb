@@ -25,7 +25,7 @@ $('#page-viewRoute').live('pageshow', function(event, data){
 	redirectLoggedOut()
 })
 
-$('#page-home, #logoutPage, #page-createByHand, #page-routesList, #page-notesphotos, #page-searchRoute, #page-viewImage, #page-account, #page-stats').live('pageshow', function(event, data){
+$('#page-home, #logoutPage, #page-createByHand, #page-routesList, #page-notesphotos, #page-searchRoute, #page-viewImage, #page-account, #page-stats, #sharePage').live('pageshow', function(event, data){
 	redirectLoggedOut()
 })
 
