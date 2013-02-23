@@ -12,7 +12,7 @@ function validateField(field, fieldName, messageTarget, rule, required, min, max
 	if(messageTarget != null){
 		messageTarget.html('&nbsp;')
 	}
-	var text = field.val()
+	var text = field.val().trim()
 	if(required){
 		if (text==null || text==''){
 			messageTarget.html(fieldName + ' is required')

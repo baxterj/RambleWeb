@@ -674,7 +674,7 @@ function createMapNotesPhotos(){
 			position: maps.noteMap.getCenter(),
 			title: 'New item created here',
 			map: maps.noteMap,
-			//icon: 'assets/images/routepoint-map-icon.png',
+			icon: 'assets/images/newNotePhoto.png',
 			zIndex: 99989,
 			draggable: true,
 			optimized: false
@@ -789,41 +789,6 @@ function cloneMarker(marker){
 
 function centerMarker(marker){
 	marker.setPosition(activeMap.getCenter())
-}
-
-function calcSearchZoom(distance, units){
-	var meters = 10000
-	if(units=='feet'){
-		meters = distance / 3
-	}else if(units=='meters'){
-		meters = distance
-	}else if(units=='kilometers'){
-		meters = distance * 1000
-	}else if(units=='miles'){
-		meters = distance * 1600
-	}
-
-	if(distance == null || distance==''){
-		meters = 10000
-	}
-
-	if(meters < 500){
-		return 15
-	}else if(meters < 2000){
-		return 14
-	}else if(meters < 4000){
-		return 12
-	}else if(meters < 8000){
-		return 11
-	}else if(meters < 40000){
-		return 10
-	}else if(meters < 100000){
-		return 9
-	}else if(meters < 200000){
-		return 7
-	}else{
-		return 6
-	}
 }
 
 function setEnableNotesPhotos(bool){
