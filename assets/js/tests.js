@@ -2,6 +2,9 @@ var testResults = []
 var passedTests = 0
 var failedTests = 0
 
+/*
+Handle the result of a test, adding it to the array of result strings
+*/
 function result(testName, success, reason){
 	var r = ''
 	if(reason != null && reason != ''){
@@ -16,6 +19,9 @@ function result(testName, success, reason){
 	testResults.push('<div class="success'+success+'">'+testName + ' - ' + 'test success: '+success + ' - ' + r + '</div>')
 }
 
+/*
+Display results of tests
+*/
 function outputResults(){
 	var html = '<h1>Passed: '+ passedTests + ' --- Failed: '+failedTests + '</h1>'
 	for(var i = 0; i < testResults.length; i++){
@@ -24,8 +30,12 @@ function outputResults(){
 	$('#testResults').html(html)
 }
 
-//argarray is passed to the function
-//outarray is an array of accepted outputs - could be variables or primitives or both
+/*
+Test a given function
+expected is whether the text is expected to pass or fail
+argarray is passed to the function
+outarray is an array of accepted outputs - could be variables or primitives or both
+*/
 function testF(func, expected, argArray, outArray){
 	var res
 	try{
@@ -51,8 +61,13 @@ function testF(func, expected, argArray, outArray){
 	}
 }
 
+/*
+Run the batch of tests
+*/
 function runTests(){
 	testResults = []
+	failedTests = 0
+	passedTests = 0
 	testResults.push('<h2>ajaxrequests.js</h2>')
 	testAjaxRequests()
 	testResults.push('<h2>utilities.js</h2>')
@@ -60,6 +75,9 @@ function runTests(){
 	outputResults()
 }
 
+/*
+Test functions in the ajaxrequests.js file
+*/
 function testAjaxRequests(){
 	window.localStorage.removeItem("apikey")
 	testF(checkLoggedIn, true, null, [false])
@@ -67,6 +85,9 @@ function testAjaxRequests(){
 	testF(checkLoggedIn, true, null, [true])
 }
 
+/*
+Test functions in the utilities.js file
+*/
 function testUtilities(){
 	var dummyField = document.createElement('input')
 	var dummyMsg = document.createElement('div')

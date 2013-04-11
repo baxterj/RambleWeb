@@ -86,17 +86,32 @@ var omsOptions = {
 	circleSpiralSwitchover: Infinity //always use a circle
 }
 
+/*
+Onload function for the route page. 
+initialises the map for this page
+sets the height of the map panel and the active map
+*/
 $('#page-viewRoute').live('pageshow', function(event){
 	createMapRoute()
 	activeMap = maps.routeMap
 })
 
+/*
+Onload function for the search page. 
+initialises the map for this page
+sets the height of the map panel and the active map
+*/
 $('#page-searchRoute').live('pageshow', function(event){
 	createMapSearch()
 	activeMap = maps.searchMap
 	
 })
 
+/*
+Onload function for the by hand creation page. 
+initialises the map for this page
+sets the height of the map panel and the active map
+*/
 $('#page-createByHand').live('pageshow', function(event){
 	createMapByHand()
 	activeMap = maps.createMap
@@ -104,6 +119,11 @@ $('#page-createByHand').live('pageshow', function(event){
 	
 })
 
+/*
+Onload function for the notes and photos page. 
+initialises the map for this page
+sets the height of the map panel and the active map
+*/
 $('#page-notesphotos').live('pageshow', function(event){
 	createMapNotesPhotos()
 	activeMap = maps.noteMap
@@ -121,7 +141,9 @@ $('#page-home, #page-create, #page-routesList').live('pageshow', function(event,
 
 
 
-
+/*
+Use google maps Geocoder api to find the location of input location (search page)
+*/
 function findMapLocation(location, messageTarget){
 	if(location != null && location != ''){
 		geocoder = new google.maps.Geocoder();
@@ -148,6 +170,10 @@ function findMapLocation(location, messageTarget){
 }
 
 
+/*
+Load a route from returned data, onto the route page.
+creates a delete button if the current user owns the route
+*/
 function loadRoute(data, messageTarget){
 	//if(maps.routeMap == null){//map not loaded yet, try again in 1 second
 	//	setTimeout("loadRoute(data, messageTarget)", 1000);
@@ -174,6 +200,9 @@ function loadRoute(data, messageTarget){
 	//}
 }
 
+/*
+Update notes and photos on the currently active map
+*/
 function updateNotesPhotos(map, limitByZoom){
 	var doUpdate = true
 	if(limitByZoom){
@@ -196,6 +225,9 @@ function updateNotesPhotos(map, limitByZoom){
 
 }
 
+/*
+Update route icons on currently active map (search map)
+*/
 function updateSearchRoutes(map){
 	clearTimeout(routeRefreshTimer)
 	routeRefreshTimer = setTimeout("routeRefreshEnabled = true", 500);
@@ -206,6 +238,9 @@ function updateSearchRoutes(map){
 	}
 }
 
+/*
+Place route markers onto the search map
+*/
 function drawRoutes(data, messageTarget){
 	if(activeMap == maps.searchMap && !spiderfied){
 		clearMarkerArray(routeMarkers)
@@ -237,7 +272,10 @@ function drawRoutes(data, messageTarget){
 	
 }
 
-//used for search map
+/*
+Load the info for the currently selected route on the search map
+If this is the first route selected, open the route details panel (so the user is aware of it)
+*/
 function showRouteContent(marker){
 	var data = routesContent[marker.num]//this will contain info & first pathpoint
 
@@ -256,6 +294,9 @@ function showRouteContent(marker){
 
 }
 
+/*
+Load the actual path for the currently previewed route, once data has returned from server
+*/
 function loadSearchRoute(data, messageTarget){
 	maps.searchMap.route = makePolyLine('#FF0000', false)
 	maps.searchMap.route.setMap(maps.searchMap); //assign route poly to route map
@@ -263,6 +304,9 @@ function loadSearchRoute(data, messageTarget){
 	setPathEndMarker(data, maps.searchMap)
 }
 
+/*
+Add the notes markers to the map
+*/
 function drawNotes(data, messageTarget){
 
 	clearMarkerArray(noteMarkers)
@@ -292,6 +336,9 @@ function drawNotes(data, messageTarget){
 	}
 }
 
+/*
+Display content for the currently selected note
+*/
 function showNoteContent(marker){
 	var cont = notesContent[marker.num]
 	var html = '<div class="noteImageContent">\n'
@@ -327,7 +374,9 @@ function showNoteContent(marker){
 }
 
 
-
+/*
+Add image markers to the map
+*/
 function drawImages(data, messageTarget){
 
 	clearMarkerArray(imageMarkers)
@@ -357,7 +406,9 @@ function drawImages(data, messageTarget){
 	}
 }
 
-
+/*
+Display content for the currently selected image
+*/
 function showImageContent(marker){
 	var cont = imagesContent[marker.num]
 	var html = '<div class="noteImageContent">\n'
@@ -382,7 +433,9 @@ function showImageContent(marker){
 	infowindow.open(activeMap, activeMarker)
 }
 
-
+/*
+Used by overlapping marker spiderfier (OMS), as the click function for every OMS marker
+*/
 function processMarker(marker){
 	if(marker.mtype=='note'){
 		showNoteContent(marker)
@@ -393,6 +446,9 @@ function processMarker(marker){
 	}
 }
 
+/*
+Clears an MVCArray of markers, and removes them from their current map
+*/
 function clearMarkerArray(arr){
 	for(var i = 0; i < arr.getLength(); i++){ 
 		arr.getAt(i).setMap(null)
@@ -401,22 +457,34 @@ function clearMarkerArray(arr){
 	arr.clear()
 }
 
+/*
+Sets all markers in an MVCArray to a new map
+*/
 function setNewMap(arr, map){
 	for(var i = 0; i < arr.getLength(); i++){ 
 		arr.getAt(i).setMap(map)
 	}
 }
 
+/*
+Add a new pathpoint to the route creation line
+*/
 function newRoutePoint(map, event){
 	createLine.getPath().push(event.latLng);
 }
 
+/*
+Remove the newest point from the route creation line
+*/
 function undoLastPoint(){
 	if(createLine != null && createLine.getPath() != null && createLine.getPath().getLength() > 0){
 		createLine.getPath().pop()
 	}
 }
 
+/*
+Create a new Overlapping Marker Spiderfier instance. Necessary when a new map is loaded
+*/
 function resetOMS(map){
 	oms = new OverlappingMarkerSpiderfier(map, omsOptions);
 	oms.addListener('click', function(marker) {
@@ -442,7 +510,9 @@ function resetOMS(map){
 	})
 }
 
-
+/*
+Create the map for the route page
+*/
 function createMapRoute(){
 	
 	var mapOptions = {
@@ -484,6 +554,10 @@ function createMapRoute(){
 
 }
 
+/*
+Create the map for the 'by hand' creation page.
+Initialises the new route line and adds click listeners
+*/
 function createMapByHand(){
 	var mapOptions = {
 		center: new google.maps.LatLng(52.803280, -1.871453),
@@ -538,6 +612,10 @@ function createMapByHand(){
 
 }
 
+/*
+Create the map for tracked routes
+Also starts GPS tracking after 1 second
+*/
 function createMapTracked(){
 	var mapOptions = {
 		center: new google.maps.LatLng(52.803280, -1.871453),
@@ -585,6 +663,9 @@ function createMapTracked(){
 
 }
 
+/*
+Creates the search map
+*/
 function createMapSearch(){
 	var mapOptions = {
 		center: new google.maps.LatLng(52.803280, -1.871453),
@@ -626,6 +707,11 @@ function createMapSearch(){
 
 }
 
+
+/*
+Creates the notes and photos map
+Initialises the 'new item marker' for placing new notes & photos
+*/
 function createMapNotesPhotos(){
 	
 	var mapOptions = {
@@ -686,7 +772,9 @@ function createMapNotesPhotos(){
 }
 
 
-
+/*
+Create favourite and done toggle buttons.  This is used on the route page and the search page
+*/
 function createFavDoneButtons(routeID, fav, done, favCount, doneCount){
 	$.mobile.activePage.find('.route_favbuttons .favBtn img').attr('src', 'assets/images/fav_'+fav+'_mini.png')
 	$.mobile.activePage.find('.route_favbuttons .doneBtn img').attr('src', 'assets/images/done_'+done+'_mini.png')
@@ -702,18 +790,28 @@ function createFavDoneButtons(routeID, fav, done, favCount, doneCount){
 	}
 }
 
+/*
+Switch the favourite button to active or inactive dependent on 'bool'
+*/
 function flipFavBtn(routeID, bool){
 	changeFav(routeID, bool)
 	$.mobile.activePage.find('.route_favbuttons .favBtn').attr('onClick', 'flipFavBtn('+routeID+', '+!bool+')')
 	$.mobile.activePage.find('.route_favbuttons .favBtn img').attr('src', 'assets/images/fav_'+bool+'_mini.png')
 }
 
+/*
+Switch the done button to active or inactive dependent on 'bool'
+*/
 function flipDoneBtn(routeID, bool){
 	changeDone(routeID, bool)
 	$.mobile.activePage.find('.route_favbuttons .doneBtn').attr('onClick', 'flipDoneBtn('+routeID+', '+!bool+')')
 	$.mobile.activePage.find('.route_favbuttons .doneBtn img').attr('src', 'assets/images/done_'+bool+'_mini.png')
 }
 
+/*
+Assign a polyline object to follow a particular path, 
+derived from a passed data object containing pathpoints
+*/
 function buildPathFromCoords(data, polyLine){
 	var path = polyLine.getPath()
 	for(var i = 0; i < data.pathpoints.length; i++){
@@ -721,6 +819,10 @@ function buildPathFromCoords(data, polyLine){
 	}
 }
 
+
+/*
+Add a 'finish flag' icon to the end of a path
+*/
 function setPathEndMarker(data, map){
 	if(pathEndMarker != null){
 		pathEndMarker.setMap(null)
@@ -739,6 +841,9 @@ function setPathEndMarker(data, map){
 
 }
 
+/*
+Create a new polyline with a given colour and editable status
+*/
 function makePolyLine(color, editable){
 	var polyOptions = {
 		strokeColor: color,
@@ -751,6 +856,9 @@ function makePolyLine(color, editable){
 	return new google.maps.Polyline(polyOptions);
 }
 
+/*
+Increment the zoom of the map, either zoom in or out
+*/
 function setMapZoom(zoomout){
 	if(zoomout){
 		map.setZoom(--mapZoom);
@@ -759,6 +867,10 @@ function setMapZoom(zoomout){
 	}
 }
 
+/*
+Set the height of the map container.  This depends on the height of the window, height of the footer,
+height of the header, and height of any given non-map content on the page
+*/
 function sortMapHeight(nonMapContentClass){
 	$.mobile.activePage.find('.map_content').css('height', $(window).height()
 	 - $.mobile.activePage.find('.map_header').outerHeight()
@@ -771,7 +883,10 @@ function sortMapHeight(nonMapContentClass){
 	}
 }
 
-
+/*
+Create a shallow copy of a marker. Used to retain the active note/photo/route marker when the 
+rest of the map refreshes
+*/
 function cloneMarker(marker){
 	newMarker = new google.maps.Marker({
 			position: marker.position,
@@ -781,16 +896,23 @@ function cloneMarker(marker){
 			num: marker.num,
 			optimized: marker.optimized,
 			clickable: marker.clickable,
-			mtype: marker.mtype
+			mtype: marker.mtypqe
 		});
 
 	return newMarker
 }
 
+/*
+Move a given marker to the center of the map viewport. this is used for the new item marker 
+when creating a note or photo
+*/
 function centerMarker(marker){
 	marker.setPosition(activeMap.getCenter())
 }
 
+/*
+Toogle, or explicitly set, note and photo markers on the active map
+*/
 function setEnableNotesPhotos(bool){
 	if(bool != null){
 		if(bool){
@@ -807,7 +929,9 @@ function setEnableNotesPhotos(bool){
 	
 }
 
-
+/*
+Start reporting device location to the map's current position marker
+*/
 function trackCurrentPosition(map){
 	startPositionWatch(false)
 	if(currentPositionMarker == null){
@@ -817,11 +941,17 @@ function trackCurrentPosition(map){
 	currentPositionMarker.setMap(map)
 }
 
+/*
+Get a textual, coordinate representation of the current device location
+*/
 function currentPosition(){
 	showAjaxLoad(true)
 	navigator.geolocation.getCurrentPosition(getPositionSuccess, getPositionError, geoLocOptions);
 }
 
+/*
+Copy current coordinates into HTML
+*/
 function getPositionSuccess(position){
 	showAjaxLoad(false)
 	if($.mobile.activePage.attr('id') == 'page-searchRoute'){
@@ -832,6 +962,11 @@ function getPositionSuccess(position){
 	}
 }
 
+/*
+Handle the success of finding Geolocation.
+If required, records the position to the route creation line
+Adds the current speed and altitude to an array, to be averaged and sent every 30 seconds
+*/
 function trackingPositionSuccess(position){
 	if(createLine != null && recordPosition){
 		if(position.coords.accuracy < 20){//only record if estimated gps accuracy is within 20 meters
@@ -843,7 +978,7 @@ function trackingPositionSuccess(position){
 			saveCreateLine()
 
 			//wait 10 seconds until do this again
-			recordPositionTimer = setTimeout("recordPosition = true", 15000); //10 seconds
+			recordPositionTimer = setTimeout("recordPosition = true", 15000); //15 seconds
 		}
 	}
 
@@ -861,7 +996,9 @@ function trackingPositionSuccess(position){
 
 }
 
-
+/*
+Load the saved create line onto the passed map, or create a new line if no saved record exists
+*/
 function loadCreateLine(map){
 	if(window.localStorage.getItem('trackingPathString') != null){
 		if(createLine == null){
@@ -876,7 +1013,9 @@ function loadCreateLine(map){
 	}
 }
 
-
+/*
+Save the currently active route to localstorage. Used for backup against crashes
+*/
 function saveCreateLine(){
 	var coords = []
 	for(var i = 0; i < createLine.getPath().getLength(); i++){
@@ -889,11 +1028,17 @@ function saveCreateLine(){
 	window.localStorage.setItem('trackingPathString', JSON.stringify(pathJSON))
 }
 
+/*
+Attempt to move the map to the device's current position
+*/
 function goToCurrentPosition(){
 	showAjaxLoad(true)
 	navigator.geolocation.getCurrentPosition(goToPositionSuccess, getPositionError, geoLocOptions);
 }
 
+/*
+Move the map to the device's current position
+*/
 function goToPositionSuccess(position){
 	showAjaxLoad(false)
 	activeMap.panTo(new google.maps.LatLng(position.coords.latitude, position.coords.longitude))
@@ -904,6 +1049,9 @@ function goToPositionSuccess(position){
 	}
 }
 
+/*
+Silently ignore position errors. Failure is evident enough
+*/
 function getPositionError(error) {
 	showAjaxLoad(false)
 	// alert('finding location failed:\n'
@@ -911,6 +1059,9 @@ function getPositionError(error) {
 	// 	'message: ' + error.message + '\n');
 }
 
+/*
+Activate phonegap geolocation api for position watching
+*/
 function startPositionWatch(createRoute){
 	if(createRoute){
 		activeMap.setZoom(15)
@@ -926,12 +1077,18 @@ function startPositionWatch(createRoute){
 	geoLocID = navigator.geolocation.watchPosition(trackingPositionSuccess, getPositionError, geoLocOptions);
 }
 
+/*
+Stop watching position with phonegap api
+*/
 function endPositionWatch(){
 	clearTimeout(recordPositionTimer)
 	navigator.geolocation.clearWatch(geoLocID);
 	geoLocID = null
 }
 
+/*
+pause watching position.  This does not actually pause the watching, but deactivates the visible effects
+*/
 function pausePositionWatch(pause){
 	if(pause){
 		clearTimeout(recordPositionTimer)
@@ -941,6 +1098,10 @@ function pausePositionWatch(pause){
 	}
 }
 
+/*
+Listener for tracking slider activation
+Pause or resume tracking based on slider value
+*/
 $("#pauseTrack").live("slidestop", function(event, ui) {
 	if($(this).val() == 'track'){
 		if(trackingPaused){
@@ -958,6 +1119,9 @@ $("#pauseTrack").live("slidestop", function(event, ui) {
 	}
 });
 
+/*
+Ask to confirm reset the creation of a route
+*/
 function resetCreation(ignoreWarning){
 	if(ignoreWarning){
 		doCreationReset()
@@ -969,6 +1133,9 @@ function resetCreation(ignoreWarning){
 	
 }
 
+/*
+Do the reset of creation. Clears all backups and resets phonegap geolocation api state
+*/
 function doCreationReset(){
 	if(createLine != null){
 		createLine.getPath().clear()
@@ -983,6 +1150,9 @@ function doCreationReset(){
 	}
 }
 
+/*
+Clear the stored averages for speed and altitude, necessary every time these stats are submitted
+*/
 function clearTrackAverages(){
 	speedMeasurements = []
 	altitudeMeasurements = []

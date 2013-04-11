@@ -5,10 +5,18 @@ var loadedTripsData = null
 var routeFromShare = 0
 var keepRouteFromShare = true
 
+/*
+Generate footer content for the first (non-ajax) loaded page. This html is stored for all
+subsequent page changes as the footerContent variable
+*/
 $(document).ready(function(){
 	$('.footer_content').html(genFooterHtml())
 })
 
+/*
+Action while loading each ajax page. Insert footer HTML and draw relevant buttons
+for current logged in/out state
+*/
 $('div[data-role="page"]').live('pageshow', function(event, data){
 	if(footerContent != null){
 		$('.footer_content').html(footerContent)
@@ -17,6 +25,10 @@ $('div[data-role="page"]').live('pageshow', function(event, data){
 	accountButton()
 })
 
+/*
+Load route page content, save intended route id in routeFromShare should the user be accessing 
+the route without being logged in. This will re-direct them back to the route once they log in
+*/
 $('#page-viewRoute').live('pageshow', function(event, data){
 	if(getUrlVars()["ref"] == 'external'){
 		routeFromShare = parseInt(getUrlVars()["id"])
@@ -25,14 +37,23 @@ $('#page-viewRoute').live('pageshow', function(event, data){
 	redirectLoggedOut()
 })
 
+/*
+Redirect logged out users to the login page for these pages
+*/
 $('#page-home, #logoutPage, #page-createByHand, #page-routesList, #page-notesphotos, #page-searchRoute, #page-viewImage, #page-account, #page-stats, #sharePage').live('pageshow', function(event, data){
 	redirectLoggedOut()
 })
 
+/*
+Redirect logged in users to the dashboard page for these pages
+*/
 $('#loginPage, #registerPage, #forgotPage, #resetPassPage').live('pageshow', function(event, data){
 	redirectLoggedIn()
 })
 
+/*
+Initialise content slider for index page
+*/
 $('#indexPage').live('pageinit', function(event, data){
 	$('#slider').nivoSlider({
 		effect: 'fade',
@@ -42,6 +63,9 @@ $('#indexPage').live('pageinit', function(event, data){
 	})
 })
 
+/*
+Initialise graph page and add listeners for check boxes to refresh data
+*/
 $('#page-stats').live('pageshow', function(event, data){
 	getTrackData()
 	$('#tripSelect').change(function(){
@@ -58,8 +82,10 @@ $('#page-stats').live('pageshow', function(event, data){
 })
 
 
+/*
+Initialise page select content swapper on dashboard page
+*/
 var routesSelectLinks = ['byHand.html', 'search.html', 'myRoutes.html?list=saved', 'myRoutes.html?list=fav']
-
 $('#page-home').live('pageinit', function(event, data){
 	showRoutesItem(1)
 	$('.routes_text div').hover(
@@ -78,7 +104,9 @@ $('#page-home').live('pageinit', function(event, data){
 	
 })
 
-
+/*
+Display the hover content associated with num
+*/
 function showRoutesItem(num){
 	$('.showing').hide().removeClass('showing')
 	$('.greenBG').removeClass('greenBG')
@@ -88,7 +116,9 @@ function showRoutesItem(num){
 	$('#routetext'+num).addClass('greenBG')
 }
 
-
+/*
+Create the html for the footer
+*/
 function genFooterHtml(){
 	var html=''
 	html+='<div class="footer_links_holder">\n'
@@ -113,6 +143,9 @@ function genFooterHtml(){
 	return html
 }
 
+/*
+Generate log in button if currently logged out, and vice versa
+*/
 function loggedInOutButton(){
 	if(checkLoggedIn()){
 		$.mobile.activePage.find('.loginLogout span span').html('Logout')
@@ -123,6 +156,9 @@ function loggedInOutButton(){
 	}
 }
 
+/*
+Remove the account button from DOM if not logged in
+*/
 function accountButton(){
 	if(!checkLoggedIn()){
 		$.mobile.activePage.find('.accountBtn').remove()
@@ -130,7 +166,9 @@ function accountButton(){
 }
 
 
-
+/*
+Preload the nivo slider carousel images
+*/
 var imgObj = new Image()
 preloadImages()
 function preloadImages(){
@@ -144,6 +182,9 @@ function preloadImages(){
 	}
 }
 
+/*
+Load graph options from passed data. Processes data and populates the dropdown menu accordingly
+*/
 function loadGraph(data){
 	
 	var trips = normaliseGraphData(data)
@@ -173,6 +214,9 @@ function loadGraph(data){
 	updateGraph(trips)
 }
 
+/*
+Handles refreshing of the chart, displaying speed, altitude, both or neither
+*/
 function updateGraph(trips){
 	createChart()
 	var noneChecked=true
@@ -201,7 +245,9 @@ function updateGraph(trips){
 }
 
 
-
+/*
+Create a new JSChart object with appropriate settings
+*/
 function createChart(){
 	//var myData = new Array([10, 20], [15, 10], [20, 30], [25, 10], [30, 5]);
 	myChart = new JSChart('chartcontainer', 'line');
@@ -233,6 +279,9 @@ function createChart(){
 	// myChart.draw();
 }
 
+/*
+Process returned speed track data. Splits it into trips at least 10 minutes apart
+*/
 function normaliseGraphData(data){
 	//var s = data.objects[0].dateRecorded.split(' ')//day month year hour min sec
 	var startDate = new Date(1990, 1, 1, 1, 1, 1)
